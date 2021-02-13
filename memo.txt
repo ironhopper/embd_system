@@ -1,0 +1,10 @@
+" Automatically closing braces
+inoremap {<CR> {<CR>}<ESC>ko<tab>
+" inoremap { {}<ESC>i
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+" inoremap < <><ESC>i
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+
+"""'''"]]))""
