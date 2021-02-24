@@ -120,7 +120,8 @@ imap <C-Enter> <ESC>o
 imap /<CR> <Esc>o
 imap c<CR> <CR>//<Space>
 imap b<CR> <CR>*<Space>
-imap ,, \n
+imap ,, \n<Right>;
+imap ,; <<"\n";
 imap /* /************************************************************<CR><CR>************************************************************/<Up><Space>
 imap #d #define 
 imap #i #include 
