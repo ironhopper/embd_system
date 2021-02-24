@@ -37,16 +37,21 @@ endif
 "endif
 
 " Automatically closing braces
-inoremap {<CR> {<CR>}<ESC>ko<Tab>
+inoremap {/<CR> { // <CR>}<ESC>ko<Space><Space><Up><End>
+inoremap {<CR> {<CR>}<ESC>ko<Space><Space>
 " Tab o , tab x
 inoremap {<Space> {   }<ESC>hhi
 " inoremap { {}<ESC>i
-inoremap (<Space> ()<ESC>i
+"inoremap (<Space> ()<ESC>i
+inoremap ( ()<ESC>i
+inoremap () ()<ESC>a
 inoremap [ []<ESC>i
 " inoremap < <><ESC>i
 inoremap ' ''<ESC>i
 inoremap " ""<ESC>i
 imap if( if(){<CR><Up><End><Left><Left>
+imap for( for(){<CR><Up><End><Left><Left>
+imap while( while(){<CR><Up><End><Left><Left>
 " 
 
 nnoremap <A-Up> :m-2<CR>
@@ -54,16 +59,16 @@ nnoremap <A-Down> :m+<CR>
 inoremap <A-Up> <Esc>:m-2<CR>
 inoremap <A-Down> <Esc>:m+<CR>
 
-nnoremap j <Up><Up>
-nnoremap k <Down><Down>
+nnoremap j <Up><Up><Up><Up>
+nnoremap k <Down><Down><Down><Down>
 nnoremap h <Left><Left>
 nnoremap l <Right><Right>
 
 " shift+arrow selection
-nmap <S-Up> v<Up>
-nmap <S-Down> v<Down>
-nmap <S-Left> v<Left>
-nmap <S-Right> v<Right>
+"nmap <S-Up> <Up><Up><Up><Up><Up><Up><Up><Up>
+"nmap <S-Down> <Down><Down><Down><Down><Down><Down><Down><Down>
+"nmap <S-Left> v<Left>
+"nmap <S-Right> v<Right>
 
 imap <C-p> <Esc>pi
 
@@ -75,10 +80,10 @@ imap <S-Right> <Esc>v<Right>
 imap <C-r> <Esc><C-r>i
 imap <C-u> <Esc>ui
 
-vmap <S-Up> <Up>
-vmap <S-Down> <Down>
-vmap <S-Left> <Left>
-vmap <S-Right> <Right>
+"vmap <S-Up> <Up>
+"vmap <S-Down> <Down>
+"vmap <S-Left> <Left>
+"vmap <S-Right> <Right>
 
 map <C-Up> <Up><Up><Up><Up>
 map <C-Down> <Down><Down><Down><Down>
