@@ -130,7 +130,10 @@ imap ,; <<"\n";
 imap /* /************************************************************<CR><CR>************************************************************/<Up><Space>
 imap #d #define 
 imap #i #include 
-
+imap log<CR> console.log();<Left><Left>
+imap table<CR> console.table();<Left><Left>
+imap co<CR> cout<<"
+imap sco<CR> std::cout<<"
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
