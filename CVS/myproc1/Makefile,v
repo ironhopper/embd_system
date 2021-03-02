@@ -1,0 +1,56 @@
+head	1.1;
+branch	1.1.1;
+access;
+symbols
+	newbranch:1.1.1.1.0.2
+	r1:1.1.1.1
+	r0:1.1.1.1
+	jeha:1.1.1;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2020.10.12.02.59.35;	author embdtut;	state Exp;
+branches
+	1.1.1.1;
+next	;
+commitid	1005F83C697338EA8D7;
+
+1.1.1.1
+date	2020.10.12.02.59.35;	author embdtut;	state Exp;
+branches;
+next	;
+commitid	1005F83C697338EA8D7;
+
+
+desc
+@@
+
+
+
+1.1
+log
+@Initial revision
+@
+text
+@OBJECT = main.o bye.o hello.o
+13184322out : main.o bye.o hello.o
+	gcc -o 13184322out main.o bye.o hello.o
+main.o : main.c
+	gcc -c main.c
+bye.o : bye.c
+	gcc -c bye.c
+hello.o : hello.c
+	gcc -c hello.c
+clean :
+	rm ${OBJECT} 13184322out
+@
+
+
+1.1.1.1
+log
+@create my project
+@
+text
+@@

@@ -1,0 +1,54 @@
+ibus 스크립트를 run_im에서 실행했습니다.
+auto 스크립트를 run_im에서 실행했습니다.
+default 스크립트를 run_im에서 실행했습니다.
+init: upstart-event-bridge main process (2116) terminated with status 1
+init: upstart-event-bridge main process ended, respawning
+init: upstart-dbus-system-bridge main process (2129) terminated with status 1
+init: upstart-dbus-system-bridge main process ended, respawning
+init: upstart-dbus-session-bridge main process (2132) terminated with status 1
+init: upstart-dbus-session-bridge main process ended, respawning
+init: upstart-file-bridge main process (2136) terminated with status 1
+init: upstart-file-bridge main process ended, respawning
+init: upstart-event-bridge main process (41166) terminated with status 1
+init: upstart-event-bridge main process ended, respawning
+init: upstart-dbus-session-bridge main process (41178) terminated with status 1
+init: upstart-dbus-session-bridge main process ended, respawning
+init: upstart-dbus-system-bridge main process (41180) terminated with status 1
+init: upstart-dbus-system-bridge main process ended, respawning
+init: upstart-file-bridge main process (41184) terminated with status 1
+init: upstart-file-bridge main process ended, respawning
+init: unity-panel-service-lockscreen main process (62884) killed by KILL signal
+init: Failed to write to log file /home/embdtut/.cache/upstart/dbus.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/dbus.log
+init: hud main process (2156) killed by BUS signal
+init: Failed to write to log file /home/embdtut/.cache/upstart/dbus.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/dbus.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/dbus.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/gnome-session-Unity.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/dbus.log
+init: Failed to write to log file /home/embdtut/.cache/upstart/dbus.log
+init: Failed to write to log 

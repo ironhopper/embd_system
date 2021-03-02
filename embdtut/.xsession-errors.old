@@ -1,0 +1,29 @@
+ibus 스크립트를 run_im에서 실행했습니다.
+auto 스크립트를 run_im에서 실행했습니다.
+default 스크립트를 run_im에서 실행했습니다.
+init: at-spi2-registryd main process ended, respawning
+init: at-spi2-registryd main process ended, respawning
+init: at-spi2-registryd main process ended, respawning
+init: at-spi2-registryd main process ended, respawning
+init: at-spi2-registryd main process ended, respawning
+init: at-spi2-registryd main process ended, respawning
+init: at-spi2-registryd main process ended, respawning
+init: at-spi2-registryd main process ended, respawning
+init: at-spi2-registryd main process ended, respawning
+init: at-spi2-registryd main process ended, respawning
+init: at-spi2-registryd respawning too fast, stopped
+init: Disconnected from notified D-Bus bus
+init: unity-settings-daemon main process (2314) terminated with status 1
+init: unity-panel-service main process (2332) terminated with status 1
+init: indicator-bluetooth main process (2406) killed by TERM signal
+init: indicator-power main process (2409) killed by TERM signal
+init: indicator-datetime main process (2412) killed by TERM signal
+init: indicator-printers main process (2416) terminated with status 1
+init: indicator-session main process (2430) killed by TERM signal
+init: job indicator-application failed to stop
+init: job dbus failed to stop
+init: job gnome-session (Unity) failed to stop
+init: job ssh-agent failed to stop
+init: job hud failed to stop
+init: job indicator-sound failed to stop
+init: job window-stack-bridge failed to stop

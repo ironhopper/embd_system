@@ -1,0 +1,1 @@
+cmd_/nfs_root/chrdev/chrdev.ko := arm-linux-gnueabihf-ld -EL -r  -T /home/embdtut/work/kernel/linux_kernel/scripts/module-common.lds --build-id  -o /nfs_root/chrdev/chrdev.ko /nfs_root/chrdev/chrdev.o /nfs_root/chrdev/chrdev.mod.o

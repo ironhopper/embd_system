@@ -1,0 +1,90 @@
+head	1.2;
+access;
+symbols
+	newbranch:1.1.1.1.0.2
+	r1:1.1.1.1
+	r0:1.1.1.1
+	jeha:1.1.1;
+locks; strict;
+comment	@ * @;
+
+
+1.2
+date	2020.10.21.13.01.38;	author embdtut;	state Exp;
+branches;
+next	1.1;
+commitid	1005F9031323AA4EF7F;
+
+1.1
+date	2020.10.12.02.59.35;	author embdtut;	state Exp;
+branches
+	1.1.1.1;
+next	;
+commitid	1005F83C697338EA8D7;
+
+1.1.1.1
+date	2020.10.12.02.59.35;	author embdtut;	state Exp;
+branches
+	1.1.1.1.2.1;
+next	;
+commitid	1005F83C697338EA8D7;
+
+1.1.1.1.2.1
+date	2020.10.21.12.55.18;	author embdtut;	state Exp;
+branches;
+next	;
+commitid	1005F902FB63A9B6CB6;
+
+
+desc
+@@
+
+
+1.2
+log
+@1.2 update main.c latest!
+@
+text
+@#include <stdio.h>
+#define ABC 123
+#define hello 456
+extern void bye(void);
+
+void hello(){
+	printf("\thello!\n");
+	printf("\tthis is latest update!! 1.2?\n");
+}
+int main(void){
+	bye();
+	hello();
+	return(0);
+}
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d8 1
+@
+
+
+1.1.1.1
+log
+@create my project
+@
+text
+@@
+
+
+1.1.1.1.2.1
+log
+@test for main.c newbranch tag 01
+@
+text
+@a7 1
+	printf("\tit is test for r1 tag branch\n");
+@
+

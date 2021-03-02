@@ -1,0 +1,13 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ABC	main.c	2;"	d	file:
+OBJECT	Makefile	/^OBJECT = main.o bye.o hello.o$/;"	m
+bye	bye.c	/^void bye(void){$/;"	f
+hello	hello.c	/^static void hello(void){$/;"	f	file:
+hello	main.c	/^void hello(){$/;"	f
+hello	main.c	3;"	d	file:
+main	main.c	/^int main(void){$/;"	f

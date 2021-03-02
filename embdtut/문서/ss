@@ -1,0 +1,6 @@
+#! \bin\bash
+ls >> ls.txt
+for v2 in ps ps ps
+do
+	v2 >> ps.txt
+done

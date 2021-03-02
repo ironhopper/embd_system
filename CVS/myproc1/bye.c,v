@@ -1,0 +1,101 @@
+head	1.3;
+access;
+symbols
+	newbranch:1.1.0.2
+	r1:1.2
+	r0:1.1.1.1
+	jeha:1.1.1;
+locks; strict;
+comment	@ * @;
+
+
+1.3
+date	2020.10.21.11.06.01;	author embdtut;	state Exp;
+branches;
+next	1.2;
+commitid	1005F9016073924652E;
+
+1.2
+date	2020.10.21.07.58.09;	author embdtut;	state Exp;
+branches;
+next	1.1;
+commitid	1005F8FE94F3816026A;
+
+1.1
+date	2020.10.12.02.59.35;	author embdtut;	state Exp;
+branches
+	1.1.1.1
+	1.1.2.1;
+next	;
+commitid	1005F83C697338EA8D7;
+
+1.1.1.1
+date	2020.10.12.02.59.35;	author embdtut;	state Exp;
+branches;
+next	;
+commitid	1005F83C697338EA8D7;
+
+1.1.2.1
+date	2020.10.21.12.00.39;	author stguest;	state Exp;
+branches;
+next	;
+commitid	1005F9022E739F2271C;
+
+
+desc
+@@
+
+
+1.3
+log
+@add many byes
+@
+text
+@#include <stdio.h>
+void bye(void){
+	printf("bye11.\n\n");
+	printf("bye22.\n\n");
+	printf("bye33.\n\n");
+	printf("bye02.\n\n");
+	printf("bye01.\n\n");
+	printf("bye00.\n\n");
+}
+@
+
+
+1.2
+log
+@add printf bye bye
+@
+text
+@d5 4
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 2
+a4 1
+	printf("bye.\n\n");
+@
+
+
+1.1.2.1
+log
+@commit test 1.1 -> 1.2 ?or not
+@
+text
+@a3 1
+	printf("bye editted test 1.1 -> 1.2 ? or higher.\n\n");
+@
+
+
+1.1.1.1
+log
+@create my project
+@
+text
+@@

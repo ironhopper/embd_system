@@ -1,0 +1,67 @@
+^C
+--- 192.168.10.197 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1002ms
+rtt min/avg/max/mdev = 0.813/0.943/1.073/0.130 ms
+embdtut@embdtut-virtual-machine:~$ ssh ecube@192.168.10.197
+The authenticity of host '192.168.10.197 (192.168.10.197)' can't be established.
+ECDSA key fingerprint is 21:18:a5:55:2e:65:17:24:99:32:b6:db:7d:e7:88:b5.
+Are you sure you want to continue connecting (yes/no)? ^C
+embdtut@embdtut-virtual-machine:~$ ssh ecube@192.168.10.197
+The authenticity of host '192.168.10.197 (192.168.10.197)' can't be established.
+ECDSA key fingerprint is 21:18:a5:55:2e:65:17:24:99:32:b6:db:7d:e7:88:b5.
+Are you sure you want to continue connecting (yes/no)? ^[[A^[[A^[[A^[[B^[[B^[[B^[[B^[[Byes
+Please type 'yes' or 'no': yes
+Warning: Permanently added '192.168.10.197' (ECDSA) to the list of known hosts.
+Write failed: Broken pipe
+embdtut@embdtut-virtual-machine:~$ ssh ecube@192.168.10.197
+ecube@192.168.10.197's password: 
+Welcome to Ubuntu 14.04.5 LTS (GNU/Linux 3.14.56-02048-geaaf16e-dirty armv7l)
+
+ * Documentation:  http://www.udoo.org/docs)')'''''']]]]]]]]]]]]]]]])'')')'')'
+ * Last login: Fri Jan  1 00:01:46 2016
+ ecube@udoo:~$ ls
+ buttondrv.ko    doorlock              ledAndTemperature  screenleft.sh    textlcdtest
+ buttontest      examplepipe           leddrv.ko          screennormal.sh  thread
+ buzzerdrv.ko    fnddrv.ko             led_server         screenright.sh   touchleft.sh
+ buzzertest      fndtest               magtest            temperaturetest  wodlr0808
+ buzzertest_old  helloarm              popenchild         Templates        work
+ colorledtest    imx6q-udoo-lvds7.dtb  popenparents       test.txt
+ Desktop         joysticktest          rotation           textlcddrv.ko
+ ecube@udoo:~$ logout
+ Connection to 192.168.10.197 closed.
+ embdtut@embdtut-virtual-machine:~$ 
+
+
+^C
+--- 192.168.10.197 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1002ms
+rtt min/avg/max/mdev = 0.813/0.943/1.073/0.130 ms
+embdtut@embdtut-virtual-machine:~$ ssh ecube@192.168.10.197
+The authenticity of host '192.168.10.197 (192.168.10.197)' can't be established.
+ECDSA key fingerprint is 21:18:a5:55:2e:65:17:24:99:32:b6:db:7d:e7:88:b5.
+Are you sure you want to continue connecting (yes/no)? ^C
+embdtut@embdtut-virtual-machine:~$ ssh ecube@192.168.10.197
+The authenticity of host '192.168.10.197 (192.168.10.197)' can't be established.
+ECDSA key fingerprint is 21:18:a5:55:2e:65:17:24:99:32:b6:db:7d:e7:88:b5.
+Are you sure you want to continue connecting (yes/no)? ^[[A^[[A^[[A^[[B^[[B^[[B^[[B^[[Byes
+Please type 'yes' or 'no': yes
+Warning: Permanently added '192.168.10.197' (ECDSA) to the list of known hosts.
+Write failed: Broken pipe
+embdtut@embdtut-virtual-machine:~$ ssh ecube@192.168.10.197
+ecube@192.168.10.197's password: 
+Welcome to Ubuntu 14.04.5 LTS (GNU/Linux 3.14.56-02048-geaaf16e-dirty armv7l)
+
+ * Documentation:  http://www.udoo.org/docs)')'''''']]]]]]]]]]]]]]]])'')')'')'
+ * Last login: Fri Jan  1 00:01:46 2016
+ ecube@udoo:~$ ls
+ buttondrv.ko    doorlock              ledAndTemperature  screenleft.sh    textlcdtest
+ buttontest      examplepipe           leddrv.ko          screennormal.sh  thread
+ buzzerdrv.ko    fnddrv.ko             led_server         screenright.sh   touchleft.sh
+ buzzertest      fndtest               magtest            temperaturetest  wodlr0808
+ buzzertest_old  helloarm              popenchild         Templates        work
+ colorledtest    imx6q-udoo-lvds7.dtb  popenparents       test.txt
+ Desktop         joysticktest          rotation           textlcddrv.ko
+ ecube@udoo:~$ logout
+ Connection to 192.168.10.197 closed.
+ embdtut@embdtut-virtual-machine:~$ 
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash

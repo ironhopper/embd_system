@@ -1,0 +1,10 @@
+[user]
+	email = jehakim22@gmail.com
+	name = JEHAKIM
+[https]
+	proxy = http://user:password@proxy.url
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

@@ -1,0 +1,79 @@
+.10
+tftp> 
+tftp> 
+tftp> ^Z
+[1]+  Stopped                 tftp 192.168
+ecube@udoo:~$ ls
+buttondrv.ko    fnddrv.ko             magtest          test.txt
+buttontest      fndtest               popenchild       textlcddrv.ko
+buzzerdrv.ko    helloarm              popenparents     textlcdtest
+buzzertest      imx6q-udoo-lvds7.dtb  rotation         thread
+buzzertest_old  joysticktest          screenleft.sh    touchleft.sh
+colorledtest    ledAndTemperature     screennormal.sh  work
+Desktop         leddrv.ko             screenright.sh
+doorlock        led_server            temperaturetest
+examplepipe     ledtest               Templates
+ecube@udoo:~$ 
+ecube@udoo:~$ 
+ecube@udoo:~$ clear
+ecube@udoo:~$ ls
+buttondrv.ko    fnddrv.ko             magtest          test.txt
+buttontest      fndtest               popenchild       textlcddrv.ko
+buzzerdrv.ko    helloarm              popenparents     textlcdtest
+buzzertest      imx6q-udoo-lvds7.dtb  rotation         thread
+buzzertest_old  joysticktest          screenleft.sh    touchleft.sh
+colorledtest    ledAndTemperature     screennormal.sh  work
+Desktop         leddrv.ko             screenright.sh
+doorlock        led_server            temperaturetest
+examplepipe     ledtest               Templates
+ecube@udoo:~$ 
+ecube@udoo:~$ mtftp 18292.168.10.100
+tftp> get helloarm
+Received 8381 bytes in 0.2 seconds
+tftp> exit
+?Invalid command
+tftp> quit
+ecube@udoo:~$ ls
+buttondrv.ko    fnddrv.ko             magtest          test.txt
+buttontest      fndtest               popenchild       textlcddrv.ko
+buzzerdrv.ko    helloarm              popenparents     textlcdtest
+buzzertest      imx6q-udoo-lvds7.dtb  rotation         thread
+buzzertest_old  joysticktest          screenleft.sh    touchleft.sh
+colorledtest    ledAndTemperature     screennormal.sh  work
+Desktop         leddrv.ko             screenright.sh
+doorlock        led_server            temperaturetest
+examplepipe     ledtest               Templates
+ecube@udoo:~$ ./helloarm
+Hello! this is gcc-arm
+ecube@udoo:~$ rm helloarm
+ecube@udoo:~$ ls
+buttondrv.ko    examplepipe           ledtest          temperaturetest
+buttontest      fnddrv.ko             magtest          Templates
+buzzerdrv.ko    fndtest               popenchild       test.txt
+buzzertest      imx6q-udoo-lvds7.dtb  popenparents     textlcddrv.ko
+buzzertest_old  joysticktest          rotation         textlcdtest
+colorledtest    ledAndTemperature     screenleft.sh    thread
+Desktop         leddrv.ko             screennormal.sh  touchleft.sh
+doorlock        led_server            screenright.sh   work
+ecube@udoo:~$ ./helloarm
+-bash: ./helloarm: No such file or directory
+ecube@udoo:~$ ./helloarmlsrm helloarm./helloarmlstftp 192.168.10.100
+tftp> get helloarm
+Received 8381 bytes in 5.0 seconds
+tftp> quit
+ecube@udoo:~$ ls
+buttondrv.ko    fnddrv.ko             magtest          test.txt
+buttontest      fndtest               popenchild       textlcddrv.ko
+buzzerdrv.ko    helloarm              popenparents     textlcdtest
+buzzertest      imx6q-udoo-lvds7.dtb  rotation         thread
+buzzertest_old  joysticktest          screenleft.sh    touchleft.sh
+colorledtest    ledAndTemperature     screennormal.sh  work
+Desktop         leddrv.ko             screenright.sh
+doorlock        led_server            temperaturetest
+examplepipe     ledtest               Templates
+ecube@udoo:~$ ./helloarm
+-bash: ./helloarm: Permission denied
+ecube@udoo:~$ sudchmod hello+x helloarm
+ecube@udoo:~$ ./helloarm
+Hello! this is gcc-arm
+ecube@udoo:~$ 

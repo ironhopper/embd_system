@@ -1,0 +1,23 @@
+#! /bin/sh
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+
+. /lib/lsb/init-functions
+
+case "$1" in
+  start)
+        xrandr -o left
+	xinput set-prop 'WaveShare WaveShare Touchscreen' 'Coordinate Transformation Matrix' 0 -1 1 1 0 0 0 0 1
+        ;;
+  restart|reload|force-reload)
+        echo "Error" >&2
+        exit 3
+        ;;
+  stop)
+        ;;
+  *)
+        echo "Usage: $0 start|stop" >&2
+        exit 3
+        ;;
+esac
+~
+

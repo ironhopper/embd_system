@@ -1,0 +1,21 @@
+ = atoi(argv[1]);
+fd = open(“/dev/periled”, O_WRONLY);
+if ( fd < 0 )
+{
+	printf(“file open error.\n");
+return fd;
+}
+write(fd, &data, 4);
+close(fd);
+return 0;
+}
+
+" Automatically closing braces
+inoremap {<CR> {<CR>}<ESC>ko<tab>
+" inoremap { {}<ESC>i
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+" inoremap < <><ESC>i
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i"""'''"]]))""))")
+}))])

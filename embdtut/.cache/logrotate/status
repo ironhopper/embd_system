@@ -1,0 +1,23 @@
+logrotate state -- version 2
+"/home/embdtut/.cache/upstart/hud.log" 2021-3-2-7:0:0
+"/home/embdtut/.cache/upstart/indicator-printers.log" 2021-2-20-7:40:40
+"/home/embdtut/.cache/upstart/indicator-application.log" 2021-2-14-7:53:10
+"/home/embdtut/.cache/upstart/indicator-power.log" 2020-10-29-16:2:10
+"/home/embdtut/.cache/upstart/indicator-bluetooth.log" 2021-2-20-7:40:40
+"/home/embdtut/.cache/upstart/indicator-sound.log" 2020-10-29-16:2:10
+"/home/embdtut/.cache/upstart/dbus.log" 2021-3-2-7:49:49
+"/home/embdtut/.cache/upstart/update-notifier-crash-_var_crash_linux-image-3.13.0-32-generic.214785.crash.log" 2021-2-15-8:8:45
+"/home/embdtut/.cache/upstart/indicator-datetime.log" 2020-10-12-8:4:7
+"/home/embdtut/.cache/upstart/unity7.log" 2020-10-29-16:2:10
+"/home/embdtut/.cache/upstart/unity-panel-service.log" 2021-3-2-7:49:49
+"/home/embdtut/.cache/upstart/at-spi2-registryd.log" 2021-2-14-7:53:10
+"/home/embdtut/.cache/upstart/unity-settings-daemon.log" 2021-3-2-7:49:49
+"/home/embdtut/.cache/upstart/unicast-local-avahi.log" 2020-10-12-8:4:7
+"/home/embdtut/.cache/upstart/update-notifier-cds.log" 2021-2-15-8:8:45
+"/home/embdtut/.cache/upstart/indicator-session.log" 2021-3-2-7:49:49
+"/home/embdtut/.cache/upstart/gnome-session-Unity.log" 2021-3-2-7:49:49
+"/home/embdtut/.cache/upstart/im-config.log" 2020-10-29-16:2:10
+"/home/embdtut/.cache/upstart/update-notifier-crash-_var_crash__usr_bin_nautilus.1000.crash.log" 2021-3-2-7:0:0
+"/home/embdtut/.cache/upstart/window-stack-bridge.log" 2020-10-29-16:2:10
+"/home/embdtut/.cache/upstart/update-notifier-release.log" 2021-2-14-7:53:10
+"/home/embdtut/.cache/upstart/upstart-event-bridge.log" 2021-2-15-8:8:45

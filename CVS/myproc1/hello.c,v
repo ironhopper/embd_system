@@ -1,0 +1,86 @@
+head	1.2;
+access;
+symbols
+	newbranch:1.2.0.2
+	r1:1.2
+	r0:1.1.1.1
+	jeha:1.1.1;
+locks; strict;
+comment	@ * @;
+
+
+1.2
+date	2020.10.21.07.59.46;	author embdtut;	state Exp;
+branches
+	1.2.2.1;
+next	1.1;
+commitid	1005F8FEA723824991B;
+
+1.1
+date	2020.10.12.02.59.35;	author embdtut;	state Exp;
+branches
+	1.1.1.1;
+next	;
+commitid	1005F83C697338EA8D7;
+
+1.2.2.1
+date	2020.10.21.12.38.42;	author embdtut;	state Exp;
+branches;
+next	;
+commitid	1005F902BD23A7943BA;
+
+1.1.1.1
+date	2020.10.12.02.59.35;	author embdtut;	state Exp;
+branches;
+next	;
+commitid	1005F83C697338EA8D7;
+
+
+desc
+@@
+
+
+1.2
+log
+@add printf hello hello
+@
+text
+@#include <stdio.h>
+extern void bye(void);
+
+static void hello(void){
+	bye();
+	printf("Hello World11.\n");
+	printf("Hello World22.\n");
+}
+@
+
+
+1.2.2.1
+log
+@branch test for hello.c
+@
+text
+@d6 1
+a6 1
+	printf("Hello World cvs update branch test.\n");
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d6 2
+a7 1
+	printf("Hello World.\n");
+@
+
+
+1.1.1.1
+log
+@create my project
+@
+text
+@@

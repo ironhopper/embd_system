@@ -1,0 +1,1432 @@
+printev nv
+baudrate=115200
+board_rev=MX6Q
+boot_fdt=try
+bootcmd=mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; fi; udooinit; if run loadimage; then run mmcboot; else run netboot; fi; else run netboot; fi
+bootdelay=3
+bootscript=echo Running bootscript from mmc ...; env import -t ${loadaddr} ${filesize};
+console=ttymxc1
+ethact=FEC
+ethaddr=00:c0:08:90:00:3c
+ethprime=FEC
+fdt_addr=0x18000000
+fdt_file=undefined
+fdt_high=0xffffffff
+image=zImage
+initrd_high=0xffffffff
+ip_dyn=yes
+loadaddr=0x12000000
+loadbootscript=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};
+loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}
+loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
+mmcargs=setenv bootargs console=${console},${baudrate} ${video} ${memory} root=${mmcroot} rootfstype=${mmcrootfstype} ahci_imx.hotplug=1
+mmcboot=echo Booting from mmc ...; run mmcargs; if test ${boot_fdt} = yes || test ${boot_fdt} = try; then if run loadfdt; then bootz ${loadaddr} - ${fdt_addr}; else if test ${boot_fdt} = try; then bootz; else echo WARN: Cannot load the DT; fi; fi; else bootz; fi;
+mmcdev=0
+mmcpart=1
+mmcroot=/dev/mmcblk0p2 rootwait rw
+mmcrootfstype=ext4
+netargs=setenv bootargs console=${console},${baudrate} root=/dev/nfs ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp
+netboot=echo Booting from net ...; run netargs; if test ${ip_dyn} = yes; then setenv get_cmd dhcp; else setenv get_cmd tftp; fi; ${get_cmd} ${image}; if test ${boot_fdt} = yes || test ${boot_fdt} = try; then if ${get_cmd} ${fdt_addr} ${fdt_file}; then bootz ${loadaddr} - ${fdt_addr}; else if test ${boot_fdt} = try; then bootz; else echo WARN: Cannot load the DT; fi; fi; else bootz; fi;
+script=uEnv.txt
+splashpos=m,m
+update_sd_firmware=if test ${ip_dyn} = yes; then setenv get_cmd dhcp; else setenv get_cmd tftp; fi; if mmc dev ${mmcdev}; then if ${get_cmd} ${update_sd_firmware_filename}; then setexpr fw_sz ${filesize} / 0x200; setexpr fw_sz ${fw_sz} + 1; mmc write ${loadaddr} 0x2 ${fw_sz}; fi; fi
+update_sd_firmware_filename=u-boot.imx
+
+Environment size: 2116/8188 bytes
+=> boot
+switch to partitions #0, OK
+mmc0 is current device
+reading uEnv.txt
+73 bytes read in 10 ms (6.8 KiB/s)
+Running bootscript from mmc ...
+Device Tree: dts-overlay/imx6q-udoo-hdmi.dtb
+reading zImage
+4544432 bytes read in 235 ms (18.4 MiB/s)
+Booting from mmc ...
+reading dts-overlay/imx6q-udoo-hdmi.dtb
+44715 bytes read in 24 ms (1.8 MiB/s)
+Kernel image @ 0x12000000 [ 0x000000 - 0x4557b0 ]
+## Flattened Device Tree blob at 18000000
+   Booting using the fdt blob at 0x18000000
+   Using Device Tree in place at 18000000, end 1800deaa
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 3.14.56-02048-geaaf16e-dirty (cndi@cndi-virtual) (gcc version 4.8.4 (Ubuntu/Linaro 4.8.4-2ubuntu1~14.04.1) ) #1 SMP PREEMPT Mon May 15 20:35:41 KST 2017
+[    0.000000] CPU: ARMv7 Processor [412fc09a] revision 10 (ARMv7), cr=10c53c7d
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+[    0.000000] Machine model: UDOO Quad Board
+[    0.000000] cma: CMA: reserved 320 MiB at 3c000000
+[    0.000000] Memory policy: Data cache writealloc
+[    0.000000] PERCPU: Embedded 8 pages/cpu @ab722000 s8256 r8192 d16320 u32768
+[    0.000000] Kernel command line: console=ttymxc1,115200 root=/dev/mmcblk0p2 rootwait rw rootfstype=ext4 ahci_imx.hotplug=1
+[    0.000000] PID hash table entries: 4096 (order: 2, 16384 bytes)
+[    0.000000] Dentry cache hash table entries: 131072 (order: 7, 524288 bytes)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 6, 262144 bytes)
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+[    0.000000]     fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)
+[    0.000000]     vmalloc : 0xc0800000 - 0xff000000   (1000 MB)
+[    0.000000]     lowmem  : 0x80000000 - 0xc0000000   (1024 MB)
+[    0.000000]     pkmap   : 0x7fe00000 - 0x80000000   (   2 MB)
+[    0.000000]     modules : 0x7f000000 - 0x7fe00000   (  14 MB)
+[    0.000000]       .text : 0x80008000 - 0x80abda8c   (10967 kB)
+[    0.000000]       .init : 0x80abe000 - 0x80afd040   ( 253 kB)
+[    0.000000]       .data : 0x80afe000 - 0x80b3aa40   ( 243 kB)
+[    0.000000]        .bss : 0x80b3aa4c - 0x80b9cbdc   ( 393 kB)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+[    0.000000] Preemptible hierarchical RCU implementation.
+[    0.000000] NR_IRQS:16 nr_irqs:16 16
+[    0.000000] L310 cache controller enabled
+[    0.000000] l2x0: 16 ways, CACHE_ID 0x410000c7, AUX_CTRL 0x32470000, Cache size: 1024 kB
+[    0.000000] Switching to timer-based delay loop
+[    0.000006] sched_clock: 32 bits at 3000kHz, resolution 333ns, wraps every 1431655765682ns
+[    0.000791] Console: colour dummy device 80x30
+[    0.000811] Calibrating delay loop (skipped), value calculated using timer frequency.. 6.00 BogoMIPS (lpj=30000)
+[    0.000825] pid_max: default: 32768 minimum: 301
+[    0.001006] Mount-cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.001019] Mountpoint-cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.009131] Initializing cgroup subsys devices
+[    0.009145] Initializing cgroup subsys freezer
+[    0.009174] CPU: Testing write buffer coherency: ok
+[    0.009443] CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+[    0.009513] Setting up static identity map for 0x105180b8 - 0x10518110
+[    0.061203] CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+[    0.081200] CPU2: thread -1, cpu 2, socket 0, mpidr 80000002
+[    0.101190] CPU3: thread -1, cpu 3, socket 0, mpidr 80000003
+[    0.101292] Brought up 4 CPUs
+[    0.101321] SMP: Total of 4 processors activated (24.00 BogoMIPS).
+[    0.101330] CPU: All CPU(s) started in SVC mode.
+[    0.102030] devtmpfs: initialized
+[    0.105863] VFP support v0.3: implementor 41 architecture 3 part 30 variant 9 rev 4
+[    0.106210] pinctrl core: initialized pinctrl subsystem
+[    0.106535] regulator-dummy: no parameters
+[    0.126792] NET: Registered protocol family 16
+[    0.135193] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.135711] cpuidle: using governor ladder
+[    0.135721] cpuidle: using governor menu
+[    0.135799] CPU identified as i.MX6Q, silicon rev 1.5
+[    0.135893] Use WDOG1 as reset source
+[    0.144626] syscon 20c8000.anatop: regmap [mem 0x020c8000-0x020c8fff] registered
+[    0.144915] vdd1p1: 800 <--> 1375 mV at 1100 mV 
+[    0.145278] vdd3p0: 2800 <--> 3150 mV at 3000 mV 
+[    0.145594] vdd2p5: 2000 <--> 2750 mV at 2400 mV 
+[    0.145920] vddarm: 725 <--> 1450 mV at 1150 mV 
+[    0.150483] vddpu: 725 <--> 1450 mV at 1150 mV 
+[    0.150842] vddsoc: 725 <--> 1450 mV at 1175 mV 
+[    0.152699] syscon 20e0000.iomuxc-gpr: regmap [mem 0x020e0000-0x020e0037] registered
+[    0.155144] syscon 21bc000.ocotp-ctrl: regmap [mem 0x021bc000-0x021bffff] registered
+[    0.160018] hw-breakpoint: found 5 (+1 reserved) breakpoint and 1 watchpoint registers.
+[    0.160029] hw-breakpoint: maximum watchpoint size is 4 bytes.
+[    0.160771] imx6q-pinctrl 20e0000.iomuxc: initialized IMX pinctrl driver
+[    0.169839] bio: create slab <bio-0> at 0
+[    0.172073] mxs-dma 110000.dma-apbh: initialized
+[    0.172745] usb_h1_vbus: 5000 mV 
+[    0.172975] usb_otg_vbus: 5000 mV 
+[    0.173172] 2P5V: 2500 mV 
+[    0.173492] i2c-core: driver [max17135] using legacy suspend method
+[    0.173502] i2c-core: driver [max17135] using legacy resume method
+[    0.174112] SCSI subsystem initialized
+[    0.174544] usbphy_nop1.11 supply vcc not found, using dummy regulator
+[    0.174650] usbphy_nop2.12 supply vcc not found, using dummy regulator
+[    0.176094] i2c i2c-0: IMX I2C adapter registered
+[    0.176675] i2c i2c-1: IMX I2C adapter registered
+[    0.177495] i2c i2c-2: IMX I2C adapter registered
+[    0.177627] Linux video capture interface: v2.00
+[    0.177673] pps_core: LinuxPPS API ver. 1 registered
+[    0.177683] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.177714] PTP clock support registered
+[    0.190522] imx-ipuv3 2400000.ipu: IPU DMFC NORMAL mode: 1(0~1), 5B(4,5), 5F(6,7)
+[    0.211282] imx-ipuv3 2800000.ipu: IPU DMFC NORMAL mode: 1(0~1), 5B(4,5), 5F(6,7)
+[    0.212080] mxc_mipi_csi2 21dc000.mipi_csi: i.MX MIPI CSI2 driver probed
+[    0.212094] mxc_mipi_csi2 21dc000.mipi_csi: i.MX MIPI CSI2 dphy version is 0x3130302a
+[    0.212173] MIPI CSI2 driver module loaded
+[    0.212375] Advanced Linux Sound Architecture Driver Initialized.
+[    0.213640] cfg80211: Calling CRDA to update world regulatory domain
+[    0.213670] Loading modules backported from Linux version v4.1.7-0-g0c5c1f1
+[    0.213680] Backport integrated by backports.git v4.1.1-1-0-g8286954
+[    0.213817] Switched to clocksource mxc_timer1
+[    0.223432] NET: Registered protocol family 2
+[    0.224298] TCP established hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.224380] TCP bind hash table entries: 8192 (order: 4, 65536 bytes)
+[    0.224506] TCP: Hash tables configured (established 8192 bind 8192)
+[    0.224581] TCP: reno registered
+[    0.224597] UDP hash table entries: 512 (order: 2, 16384 bytes)
+[    0.224655] UDP-Lite hash table entries: 512 (order: 2, 16384 bytes)
+[    0.224944] NET: Registered protocol family 1
+[    0.225252] hw perfevents: enabled with ARMv7 Cortex-A9 PMU driver, 7 counters available
+[    0.226224] imx6_busfreq busfreq.14: DDR medium rate not supported.
+[    0.226631] Bus freq driver module loaded
+[    0.227547] futex hash table entries: 1024 (order: 4, 65536 bytes)
+[    0.234541] VFS: Disk quotas dquot_6.5.2
+[    0.236497] msgmni has been set to 2005
+[    0.239116] io scheduler noop registered
+[    0.239127] io scheduler deadline registered
+[    0.239162] io scheduler cfq registered (default)
+[    0.239631] imx-weim 21b8000.weim: Driver registered.
+[    0.241933] MIPI DSI driver module loaded
+[    0.242996] mxc_hdmi 20e0000.hdmi_video: Detected HDMI controller 0x13:0xa:0xa0:0xc1
+[    0.243015] fbcvt: Refresh rate not CVT standard
+[    0.243024] fbcvt: Aspect ratio not CVT standard
+[    0.243041] fbcvt: 1024x600@40: CVT Name - Not a CVT standard - 0.614 Mega Pixel Image
+[    0.243041] 
+[    0.243136] mxc_sdc_fb fb.29: registered mxc display driver hdmi IPU1_DISP0
+[    0.243148] mxc_sdc_fb fb.29: registered mxc display driver hdmi
+[    0.331630] Console: switching to colour frame buffer device 90x36
+[    0.375258] imx-sdma 20ec000.sdma: no iram assigned, using external mem
+[    0.375473] imx-sdma 20ec000.sdma: no event needs to be remapped
+[    0.375660] imx-sdma 20ec000.sdma: loaded firmware 3.1
+[    0.378512] imx-sdma 20ec000.sdma: initialized
+[    0.378886] Serial: IMX driver
+[    0.379304] 21e8000.serial: ttymxc1 at MMIO 0x21e8000 (irq = 59, base_baud = 5000000) is a IMX
+[    1.103594] console [ttymxc1] enabled
+[    1.107739] 21f0000.serial: ttymxc3 at MMIO 0x21f0000 (irq = 61, base_baud = 5000000) is a IMX
+[    1.116718] serial: Freescale lpuart driver
+[    1.121988] imx sema4 driver is registered.
+[    1.126246] [drm] Initialized drm 1.1.0 20060810
+[    1.131228] [drm] Initialized vivante 1.0.0 20120216 on minor 0
+[    1.141373] loop: module loaded
+[    1.146095] ahci-imx 2200000.sata: fsl,transmit-level-mV not specified, using 00000024
+[    1.154047] ahci-imx 2200000.sata: fsl,transmit-boost-mdB not specified, using 00000480
+[    1.162063] ahci-imx 2200000.sata: fsl,transmit-atten-16ths not specified, using 00002000
+[    1.170265] ahci-imx 2200000.sata: fsl,receive-eq-mdB not specified, using 05000000
+[    1.180735] ahci-imx 2200000.sata: SSS flag set, parallel bus scan disabled
+[    1.187753] ahci-imx 2200000.sata: AHCI 0001.0300 32 slots 1 ports 3 Gbps 0x1 impl platform mode
+[    1.196572] ahci-imx 2200000.sata: flags: ncq sntf stag pm led clo only pmp pio slum part ccc apst 
+[    1.206932] scsi0 : ahci_platform
+[    1.210580] ata1: SATA max UDMA/133 mmio [mem 0x02200000-0x02203fff] port 0x100 irq 71
+[    1.221730] spi_imx 200c000.ecspi: probed
+[    1.226803] 2188000.ethernet supply phy not found, using dummy regulator
+[    1.344221] pps pps0: new PPS source ptp0
+[    1.352848] libphy: fec_enet_mii_bus: probed
+[    1.357615] fec 2188000.ethernet eth0: registered PHC device 0
+[    1.363888] mousedev: PS/2 mouse device common for all mice
+[    1.370054] input: st1232-touchscreen as /devices/soc0/soc.0/2100000.aips-bus/21a8000.i2c/i2c-2/2-0055/input/input0
+[    1.381511] snvs_rtc 20cc034.snvs-rtc-lp: rtc core: registered 20cc034.snvs-rtc-lp as rtc0
+[    1.389917] i2c /dev entries driver
+[    1.394678] mxc_v4l2_output v4l2_out.21: V4L2 device registered as video16
+[    1.401706] mxc_v4l2_output v4l2_out.21: V4L2 device registered as video17
+[    1.409717] imx2-wdt 20bc000.wdog: IMX2+ Watchdog Timer enabled. timeout=60s (nowayout=0)
+[    1.418172] sdhci: Secure Digital Host Controller Interface driver
+[    1.424380] sdhci: Copyright(c) Pierre Ossman
+[    1.428745] sdhci-pltfm: SDHCI platform and OF driver helper
+[    1.435111] mmc0: no vqmmc regulator found
+[    1.439223] mmc0: no vmmc regulator found
+[    1.483853] mmc0: SDHCI controller on 2198000.usdhc [2198000.usdhc] using ADMA
+[    1.491601] Galcore version 5.0.11.25762
+[    1.535738] mmc0: host does not support reading read-only switch. assuming write-enable.
+[    1.553932] mmc0: new high speed SDHC card at address aaaa
+[    1.560273] mmcblk0: mmc0:aaaa SC16G 14.8 GiB 
+[    1.563934] ata1: SATA link down (SStatus 0 SControl 300)
+[    1.576010]  mmcblk0: p1 p2
+[    1.805637] mxc_vdoa 21e4000.vdoa: i.MX Video Data Order Adapter(VDOA) driver probed
+[    1.813990] mxc_vpu 2040000.vpu: VPU initialized
+[    1.884162] VT1613 SoC Audio Codec [ID = 5649 - 4123]
+[    1.892346] imx-ac97-vt1613 sound.17: vt1613-hifi-analog <-> 2028000.ssi mapping ok
+[    1.904488] imx-audio-hdmi sound-hdmi.18: hdmi-hifi <-> hdmi_audio.3 mapping ok
+[    1.912826] nf_conntrack version 0.5.0 (16043 buckets, 64172 max)
+[    1.919601] TCP: cubic registered
+[    1.922933] NET: Registered protocol family 17
+[    1.927460] Key type dns_resolver registered
+[    1.933015] ThumbEE CPU extension supported.
+[    1.937855] usb_otg_vbus: disabling
+[    1.941359] usb_h1_vbus: disabling
+[    1.945242] regulator-dummy: disabling
+[    1.949200] imx mcc test is registered.
+[    1.953531] snvs_rtc 20cc034.snvs-rtc-lp: setting system clock to 2016-01-01 00:29:21 UTC (1451608161)
+[    1.963587] imx_thermal tempmon.10: Extended Commercial CPU temperature grade
+[    1.970775] imx_thermal tempmon.10: max:105C crit:100C passive:95C
+[    1.986164] ALSA device list:
+[    1.989150]   #0: imx-vt1613-audio
+[    1.992557]   #1: imx-hdmi-soc
+[    2.991616] EXT4-fs (mmcblk0p2): recovery complete
+[    3.000343] EXT4-fs (mmcblk0p2): mounted filesystem with ordered data mode. Opts: (null)
+[    3.008535] VFS: Mounted root (ext4 filesystem) on device 179:2.
+[    3.014779] devtmpfs: mounted
+[    3.018150] Freeing unused kernel memory: 252K (80abe000 - 80afd000)
+[    3.407004] random: init urandom read with 39 bits of entropy available
+[    3.785361] init: mounted-proc main process (126) terminated with status 1
+[    4.894666] ov5640_read_reg:write reg error:reg=300a
+[    4.920643] ERROR: v4l2 capture: slave not found!
+[    4.931551] ERROR: v4l2 capture: slave not found!
+ * Setting up X socket directories...        [ OK ]
+ * Loading cpufreq kernel modules...        [ OK ]
+ * CPUFreq Utilities: Setting ondemand CPUFreq governor...         * CPU0...         * CPU1...         * CPU2...         * CPU3...        [ OK ]
+ * Setting sysfs variables...        [ OK ]
+ * Starting NTP server ntpd        [ OK ]
+
+Ubuntu 14.04.5 LTS udoo ttymxc1
+
+
+default username:password is [ecube:ecube]
+udoo login: [   14.662080] imx-hdmi-audio imx-hdmi-audio: HDMI Video is not ready!
+[   14.668564] imx-hdmi-audio imx-hdmi-audio: ASoC: can't open platform imx-hdmi-audio: -22
+[   14.677526] imx-hdmi-audio imx-hdmi-audio: HDMI Video is not ready!
+[   14.683910] imx-hdmi-audio imx-hdmi-audio: ASoC: can't open platform imx-hdmi-audio: -22
+[   35.878260] systemd-udevd[257]: timeout 'accelerometer /devices/virtual/input/input3'
+[   35.886271] systemd-udevd[269]: timeout 'accelerometer /devices/virtual/input/input2'
+
+Ubuntu 14.04.5 LTS udoo ttymxc1
+
+
+default username:password is [ecube:ecube]
+udoo login: 
+Ubuntu 14.04.5 LTS udoo ttymxc1
+
+
+default username:password is [ecube:ecube]
+udoo login: 
+Ubuntu 14.04.5 LTS udoo ttymxc1
+
+
+default username:password is [ecube:ecube]
+udoo login: 
+Ubuntu 14.04.5 LTS udoo ttymxc1
+
+
+default username:password is [ecube:ecube]
+udoo login: ecbue
+Password: 
+Login timed out after þ
+Ubuntu 14.04.5 LTS udoo ttymxc1
+
+
+default username:password is [ecube:ecube]
+udoo login: ecube
+Password: 
+Last login: Fri Jan  1 00:24:59 UTC 2016 on ttymxc1
+Welcome to Ubuntu 14.04.5 LTS (GNU/Linux 3.14.56-02048-geaaf16e-dirty armv7l)
+
+ * Documentation:  http://www.udoo.org/docs/
+ecube@udoo:~$ ls
+buttondrv.ko    fnddrv.ko             popenchild       textlcddrv.ko
+buttontest      fndtest               popenparents     textlcdtest
+buzzerdrv.ko    imx6q-udoo-lvds7.dtb  rotation         thread
+buzzertest      joysticktest          screenleft.sh    touchleft.sh
+buzzertest_old  ledAndTemperature     screennormal.sh  wodlr0808
+colorledtest    leddrv.ko             screenright.sh   worke
+Desktop         led_server            temperaturetest
+doorlock        ledtest               Templates
+examplepipe     magtest               test.txt
+ecube@udoo:~$ cd /
+ecube@udoo:/$ ls
+bin   dev  gpio  lib         media  opt   root  sbin     srv  tmp  var
+boot  etc  home  lost+found  mnt    proc  run   selinux  sys  usr
+ecube@udoo:/$ cd boot
+ecube@udoo:/boot$ ls
+config-3.14.56-udooqdl-02044-gddaad11
+docs
+dts
+dts-overlay
+quickstart.html
+System.map-3.14.56-udooqdl-02044-gddaad11
+System Volume Information
+uEnv.txt
+zImage
+ecube@udoo:/boot$ cd
+ecube@udoo:~$ -==
+ecube@udoo:~$ 
+ecube@udoo:~$ fdisk -I
+fdisk: invalid option -- 'I'
+Usage:
+ fdisk [options] <disk>    change partition table
+ fdisk [options] -l <disk> list partition table(s)
+ fdisk -s <partition>      give partition size(s) in blocks
+
+Options:
+ -b <size>             sector size (512, 1024, 2048 or 4096)
+ -c[=<mode>]           compatible mode: 'dos' or 'nondos' (default)
+ -h                    print this help text
+ -u[=<unit>]           display units: 'cylinders' or 'sectors' (default)
+ -v                    print program version
+ -C <number>           specify the number of cylinders
+ -H <number>           specify the number of heads
+ -S <number>           specify the number of sectors per track
+
+ecube@udoo:~$ fdisk -Il
+ecube@udoo:~$ dcd /
+ecube@udoo:/$ fdisk -l
+ecube@udoo:/$ fdisk -lsudo 
+[sudo] password for ecube: 
+
+Disk /dev/mmcblk0: 15.9 GB, 15931539456 bytes
+4 heads, 16 sectors/track, 486192 cylinders, total 31116288 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00017840
+
+        Device Boot      Start         End      Blocks   Id  System
+/dev/mmcblk0p1            2048       67583       32768    e  W95 FAT16 (LBA)
+/dev/mmcblk0p2           67584    31116287    15524352   83  Linux
+ecube@udoo:/$ cd dev/mm/dev/mmcblk0p1
+-bash: cd: /dev/mmcblk0p1: Not a directory
+ecube@udoo:/$ /devc/devd/dev /dev
+ecube@udoo:/dev$ ls
+autofs                  loop7               tty1   tty38  tty9
+block                   loop-control        tty10  tty39  ttymxc1
+bus                     mem                 tty11  tty4   ttymxc3
+char                    mmcblk0             tty12  tty40  ubi_ctrl
+console                 mmcblk0p1           tty13  tty41  udoo_ard
+core                    mmcblk0p2           tty14  tty42  uinput
+cpu_dma_latency         mxc_hdmi            tty15  tty43  urandom
+disk                    mxc_ipu             tty16  tty44  v4l
+dri                     mxc_vpu             tty17  tty45  vcs
+fb0                     net                 tty18  tty46  vcs1
+fb1                     network_latency     tty19  tty47  vcs2
+fd                      network_throughput  tty2   tty48  vcs3
+FreescaleAccelerometer  null                tty20  tty49  vcs4
+FreescaleGyroscope      ppp                 tty21  tty5   vcs5
+FreescaleMagnetometer   pps0                tty22  tty50  vcs6
+full                    ptmx                tty23  tty51  vcs7
+fuse                    ptp0                tty24  tty52  vcsa
+galcore                 pts                 tty25  tty53  vcsa1
+i2c-0                   random              tty26  tty54  vcsa2
+i2c-1                   rtc                 tty27  tty55  vcsa3
+i2c-2                   rtc0                tty28  tty56  vcsa4
+input                   sequencer           tty29  tty57  vcsa5
+kmsg                    sequencer2          tty3   tty58  vcsa6
+log                     shm                 tty30  tty59  vcsa7
+loop0                   snd                 tty31  tty6   video0
+loop1                   spidev1.0           tty32  tty60  video1
+loop2                   stderr              tty33  tty61  video16
+loop3                   stdin               tty34  tty62  video17
+loop4                   stdout              tty35  tty63  watchdog
+loop5                   tty                 tty36  tty7   zero
+loop6                   tty0                tty37  tty8
+ecube@udoo:/dev$ ls -l
+total 0
+crw-------  1 root  root     10, 235 Jan  1 00:29 autofs
+drwxr-xr-x  2 root  root         260 Jan  1 00:29 block
+drwxr-xr-x  3 root  root          60 Jan  1 00:29 bus
+drwxr-xr-x  2 root  root        2780 Jan  1 00:29 char
+crw-------  1 root  root      5,   1 Jan  1 00:29 console
+lrwxrwxrwx  1 root  root          11 Jan  1 00:29 core -> /proc/kcore
+crw-------  1 root  root     10,  63 Jan  1 00:29 cpu_dma_latency
+drwxr-xr-x  6 root  root         120 Jan  1 00:29 disk
+drwxr-xr-x  2 root  root          60 Jan  1  1970 dri
+crw-rw-rw-  1 root  video    29,   0 Jan  1 00:29 fb0
+crw-rw-rw-  1 root  video    29,   1 Jan  1 00:29 fb1
+lrwxrwxrwx  1 root  root          13 Jan  1 00:29 fd -> /proc/self/fd
+crw-------  1 root  root     10,  58 Jan  1 00:29 FreescaleAccelerometer
+crw-------  1 root  root     10,  59 Jan  1 00:29 FreescaleGyroscope
+crw-------  1 root  root     10,  57 Jan  1 00:29 FreescaleMagnetometer
+crw-rw-rw-  1 root  root      1,   7 Jan  1 00:29 full
+crw-rw-rw-  1 root  root     10, 229 Jan  1 00:29 fuse
+crw-rw-rw-  1 root  root    199,   0 Jan  1 00:29 galcore
+crw-rw----  1 root  i2c      89,   0 Jan  1 00:29 i2c-0
+crw-rw----  1 root  i2c      89,   1 Jan  1 00:29 i2c-1
+crw-rw----  1 root  i2c      89,   2 Jan  1 00:29 i2c-2
+drwxr-xr-x  3 root  root         160 Jan  1 00:29 input
+crw-r--r--  1 root  root      1,  11 Jan  1 00:29 kmsg
+srw-rw-rw-  1 root  root           0 Jan  1 00:29 log
+brw-rw----  1 root  disk      7,   0 Jan  1 00:29 loop0
+brw-rw----  1 root  disk      7,   1 Jan  1 00:29 loop1
+brw-rw----  1 root  disk      7,   2 Jan  1 00:29 loop2
+brw-rw----  1 root  disk      7,   3 Jan  1 00:29 loop3
+brw-rw----  1 root  disk      7,   4 Jan  1 00:29 loop4
+brw-rw----  1 root  disk      7,   5 Jan  1 00:29 loop5
+brw-rw----  1 root  disk      7,   6 Jan  1 00:29 loop6
+brw-rw----  1 root  disk      7,   7 Jan  1 00:29 loop7
+crw-------  1 root  root     10, 237 Jan  1 00:29 loop-control
+crw-r-----  1 root  kmem      1,   1 Jan  1 00:29 mem
+brw-rw----  1 root  disk    179,   0 Jan  1 00:29 mmcblk0
+brw-rw----  1 root  disk    179,   1 Jan  1 00:29 mmcblk0p1
+brw-rw----  1 root  disk    179,   2 Jan  1 00:29 mmcblk0p2
+crw-------  1 root  root    249,   0 Jan  1 00:29 mxc_hdmi
+crw-rw-rw-  1 root  root    251,   0 Jan  1 00:29 mxc_ipu
+crw-rw-rw-  1 root  root    246,   0 Jan  1 00:29 mxc_vpu
+drwxr-xr-x  2 root  root          60 Jan  1 00:29 net
+crw-------  1 root  root     10,  62 Jan  1 00:29 network_latency
+crw-------  1 root  root     10,  61 Jan  1 00:29 network_throughput
+crw-rw-rw-  1 root  root      1,   3 Jan  1 00:29 null
+crw-------  1 root  root    108,   0 Jan  1 00:29 ppp
+crw-------  1 root  root    253,   0 Jan  1 00:29 pps0
+crw-rw-rw-  1 root  tty       5,   2 Jan  1 00:29 ptmx
+crw-------  1 root  root    252,   0 Jan  1 00:29 ptp0
+drwxr-xr-x  2 root  root           0 Jan  1  1970 pts
+crw-rw-rw-  1 root  root      1,   8 Jan  1 00:29 random
+lrwxrwxrwx  1 root  root           4 Jan  1 00:29 rtc -> rtc0
+crw-------  1 root  root    254,   0 Jan  1 00:29 rtc0
+crw-rw----+ 1 root  audio    14,   1 Jan  1 00:29 sequencer
+crw-rw----+ 1 root  audio    14,   8 Jan  1 00:29 sequencer2
+lrwxrwxrwx  1 root  root           8 Jan  1 00:29 shm -> /run/shm
+drwxr-xr-x  3 root  root         200 Jan  1 00:29 snd
+crw-------  1 root  root    153,   0 Jan  1 00:29 spidev1.0
+lrwxrwxrwx  1 root  root          15 Jan  1 00:29 stderr -> /proc/self/fd/2
+lrwxrwxrwx  1 root  root          15 Jan  1 00:29 stdin -> /proc/self/fd/0
+lrwxrwxrwx  1 root  root          15 Jan  1 00:29 stdout -> /proc/self/fd/1
+crw-rw-rw-  1 root  tty       5,   0 Jan  1 00:45 tty
+crw--w----  1 root  tty       4,   0 Jan  1 00:29 tty0
+crw-rw----  1 root  tty       4,   1 Jan  1 00:29 tty1
+crw--w----  1 root  tty       4,  10 Jan  1 00:29 tty10
+crw--w----  1 root  tty       4,  11 Jan  1 00:29 tty11
+crw--w----  1 root  tty       4,  12 Jan  1 00:29 tty12
+crw--w----  1 root  tty       4,  13 Jan  1 00:29 tty13
+crw--w----  1 root  tty       4,  14 Jan  1 00:29 tty14
+crw--w----  1 root  tty       4,  15 Jan  1 00:29 tty15
+crw--w----  1 root  tty       4,  16 Jan  1 00:29 tty16
+crw--w----  1 root  tty       4,  17 Jan  1 00:29 tty17
+crw--w----  1 root  tty       4,  18 Jan  1 00:29 tty18
+crw--w----  1 root  tty       4,  19 Jan  1 00:29 tty19
+crw-rw----  1 root  tty       4,   2 Jan  1 00:29 tty2
+crw--w----  1 root  tty       4,  20 Jan  1 00:29 tty20
+crw--w----  1 root  tty       4,  21 Jan  1 00:29 tty21
+crw--w----  1 root  tty       4,  22 Jan  1 00:29 tty22
+crw--w----  1 root  tty       4,  23 Jan  1 00:29 tty23
+crw--w----  1 root  tty       4,  24 Jan  1 00:29 tty24
+crw--w----  1 root  tty       4,  25 Jan  1 00:29 tty25
+crw--w----  1 root  tty       4,  26 Jan  1 00:29 tty26
+crw--w----  1 root  tty       4,  27 Jan  1 00:29 tty27
+crw--w----  1 root  tty       4,  28 Jan  1 00:29 tty28
+crw--w----  1 root  tty       4,  29 Jan  1 00:29 tty29
+crw--w----  1 root  tty       4,   3 Jan  1 00:29 tty3
+crw--w----  1 root  tty       4,  30 Jan  1 00:29 tty30
+crw--w----  1 root  tty       4,  31 Jan  1 00:29 tty31
+crw--w----  1 root  tty       4,  32 Jan  1 00:29 tty32
+crw--w----  1 root  tty       4,  33 Jan  1 00:29 tty33
+crw--w----  1 root  tty       4,  34 Jan  1 00:29 tty34
+crw--w----  1 root  tty       4,  35 Jan  1 00:29 tty35
+crw--w----  1 root  tty       4,  36 Jan  1 00:29 tty36
+crw--w----  1 root  tty       4,  37 Jan  1 00:29 tty37
+crw--w----  1 root  tty       4,  38 Jan  1 00:29 tty38
+crw--w----  1 root  tty       4,  39 Jan  1 00:29 tty39
+crw--w----  1 root  tty       4,   4 Jan  1 00:29 tty4
+crw--w----  1 root  tty       4,  40 Jan  1 00:29 tty40
+crw--w----  1 root  tty       4,  41 Jan  1 00:29 tty41
+crw--w----  1 root  tty       4,  42 Jan  1 00:29 tty42
+crw--w----  1 root  tty       4,  43 Jan  1 00:29 tty43
+crw--w----  1 root  tty       4,  44 Jan  1 00:29 tty44
+crw--w----  1 root  tty       4,  45 Jan  1 00:29 tty45
+crw--w----  1 root  tty       4,  46 Jan  1 00:29 tty46
+crw--w----  1 root  tty       4,  47 Jan  1 00:29 tty47
+crw--w----  1 root  tty       4,  48 Jan  1 00:29 tty48
+crw--w----  1 root  tty       4,  49 Jan  1 00:29 tty49
+crw--w----  1 root  tty       4,   5 Jan  1 00:29 tty5
+crw--w----  1 root  tty       4,  50 Jan  1 00:29 tty50
+crw--w----  1 root  tty       4,  51 Jan  1 00:29 tty51
+crw--w----  1 root  tty       4,  52 Jan  1 00:29 tty52
+crw--w----  1 root  tty       4,  53 Jan  1 00:29 tty53
+crw--w----  1 root  tty       4,  54 Jan  1 00:29 tty54
+crw--w----  1 root  tty       4,  55 Jan  1 00:29 tty55
+crw--w----  1 root  tty       4,  56 Jan  1 00:29 tty56
+crw--w----  1 root  tty       4,  57 Jan  1 00:29 tty57
+crw--w----  1 root  tty       4,  58 Jan  1 00:29 tty58
+crw--w----  1 root  tty       4,  59 Jan  1 00:29 tty59
+crw--w----  1 root  tty       4,   6 Jan  1 00:29 tty6
+crw--w----  1 root  tty       4,  60 Jan  1 00:29 tty60
+crw--w----  1 root  tty       4,  61 Jan  1 00:29 tty61
+crw--w----  1 root  tty       4,  62 Jan  1 00:29 tty62
+crw--w----  1 root  tty       4,  63 Jan  1 00:29 tty63
+crw--w----  1 root  tty       4,   7 Jan  1 00:29 tty7
+crw--w----  1 root  tty       4,   8 Jan  1 00:29 tty8
+crw--w----  1 root  tty       4,   9 Jan  1 00:29 tty9
+crw-------  1 ecube tty     207,  17 Jan  1 00:47 ttymxc1
+crw-rw----  1 root  dialout 207,  19 Jan  1 00:29 ttymxc3
+crw-------  1 root  root     10,  60 Jan  1 00:29 ubi_ctrl
+crw-rw----  1 root  dialout 247,   0 Jan  1 00:29 udoo_ard
+crw-------  1 root  root     10, 223 Jan  1 00:29 uinput
+crw-rw-rw-  1 root  root      1,   9 Jan  1 00:29 urandom
+drwxr-xr-x  3 root  root          60 Jan  1 00:29 v4l
+crw-rw----  1 root  tty       7,   0 Jan  1 00:29 vcs
+crw-rw----  1 root  tty       7,   1 Jan  1 00:29 vcs1
+crw-rw----  1 root  tty       7,   2 Jan  1 00:29 vcs2
+crw-rw----  1 root  tty       7,   3 Jan  1 00:29 vcs3
+crw-rw----  1 root  tty       7,   4 Jan  1 00:29 vcs4
+crw-rw----  1 root  tty       7,   5 Jan  1 00:29 vcs5
+crw-rw----  1 root  tty       7,   6 Jan  1 00:29 vcs6
+crw-rw----  1 root  tty       7,   7 Jan  1 00:29 vcs7
+crw-rw----  1 root  tty       7, 128 Jan  1 00:29 vcsa
+crw-rw----  1 root  tty       7, 129 Jan  1 00:29 vcsa1
+crw-rw----  1 root  tty       7, 130 Jan  1 00:29 vcsa2
+crw-rw----  1 root  tty       7, 131 Jan  1 00:29 vcsa3
+crw-rw----  1 root  tty       7, 132 Jan  1 00:29 vcsa4
+crw-rw----  1 root  tty       7, 133 Jan  1 00:29 vcsa5
+crw-rw----  1 root  tty       7, 134 Jan  1 00:29 vcsa6
+crw-rw----  1 root  tty       7, 135 Jan  1 00:29 vcsa7
+crw-rw----+ 1 root  video    81,   2 Jan  1 00:29 video0
+crw-rw----+ 1 root  video    81,   3 Jan  1 00:29 video1
+crw-rw----+ 1 root  video    81,   0 Jan  1 00:29 video16
+crw-rw----+ 1 root  video    81,   1 Jan  1 00:29 video17
+crw-------  1 root  root     10, 130 Jan  1 00:29 watchdog
+crw-rw-rw-  1 root  root      1,   5 Jan  1 00:29 zero
+ecube@udoo:/dev$ lscd mmcblk0p1
+-bash: cd: mmcblk0p1: Not a directory
+ecube@udoo:/dev$ vi block/cmmcmcblk0p1
+â–½  "mmcblk0p1" is not a file~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               ~                                                                               0,0-1All:qecube@udoo:/dev$ vi mmcblk0p1cdvicd ..
+ecube@udoo:/$ ls
+bin   dev  gpio  lib         media  opt   root  sbin     srv  tmp  var
+boot  etc  home  lost+found  mnt    proc  run   selinux  sys  usr
+ecube@udoo:/$ cd sour
+ecube@udoo:~$ ls
+buttondrv.ko    fnddrv.ko             popenchild       textlcddrv.ko
+buttontest      fndtest               popenparents     textlcdtest
+buzzerdrv.ko    imx6q-udoo-lvds7.dtb  rotation         thread
+buzzertest      joysticktest          screenleft.sh    touchleft.sh
+buzzertest_old  ledAndTemperature     screennormal.sh  wodlr0808
+colorledtest    leddrv.ko             screenright.sh   worke
+Desktop         led_server            temperaturetest
+doorlock        ledtest               Templates
+examplepipe     magtest               test.txt
+ecube@udoo:~$ cd ss /
+ecube@udoo:/$ ls
+bin   dev  gpio  lib         media  opt   root  sbin     srv  tmp  var
+boot  etc  home  lost+found  mnt    proc  run   selinux  sys  usr
+ecube@udoo:/$ cd boot
+ecube@udoo:/boot$ ls
+config-3.14.56-udooqdl-02044-gddaad11
+docs
+dts
+dts-overlay
+quickstart.html
+System.map-3.14.56-udooqdl-02044-gddaad11
+System Volume Information
+uEnv.txt
+zImage
+ecube@udoo:/boot$ lcd ..
+ecube@udoo:/$ ls root
+ls: cannot open directory root: Permission denied
+ecube@udoo:/$ lcd root
+-bash: cd: root: Permission denied
+ecube@udoo:/$ ussudo cd root
+[sudo] password for ecube: 
+sudo: cd: command not found
+ecube@udoo:/$ els
+bin   dev  gpio  lib         media  opt   root  sbin     srv  tmp  var
+boot  etc  home  lost+found  mnt    proc  run   selinux  sys  usr
+ecube@udoo:/$ cd root
+-bash: cd: root: Permission denied
+ecube@udoo:/$ sudo cd sroot
+sudo: cd: command not found
+ecube@udoo:/$ efind . / -printname 'mkudoobuntu'.;tar.gz' -print
+find: `/var/spool/cron/crontabs': Permission denied
+find: `/var/spool/rsyslog': Permission denied
+find: `/var/lib/sudo': Permission denied
+find: `/var/lib/lightdm': Permission denied
+find: `/var/lib/php5': Permission denied
+find: `/var/lib/udisks2': Permission denied
+find: `/var/lib/polkit-1': Permission denied
+find: `/var/cache/ldconfig': Permission denied
+find: `/lost+found': Permission denied
+find: `/etc/ssl/private': Permission denied
+find: `/etc/polkit-1/localauthority': Permission denied
+find: `/root': Permission denied
+find: `/run/udisks2': Permission denied
+find: `/run/wpa_supplicant': Permission denied
+find: `/run/lightdm': Permission denied
+find: `/run/user/65534': Permission denied
+find: `/proc/tty/driver': Permission denied
+find: `/proc/1/task/1/fd': Permission denied
+find: `/proc/1/task/1/fdinfo': Permission denied
+find: `/proc/1/task/1/ns': Permission denied
+find: `/proc/1/fd': Permission denied
+find: `/proc/1/map_files': Permission denied
+find: `/proc/1/fdinfo': Permission denied
+find: `/proc/1/ns': Permission denied
+find: `/proc/2/task/2/fd': Permission denied
+find: `/proc/2/task/2/fdinfo': Permission denied
+find: `/proc/2/task/2/ns': Permission denied
+find: `/proc/2/fd': Permission denied
+find: `/proc/2/map_files': Permission denied
+find: `/proc/2/fdinfo': Permission denied
+find: `/proc/2/ns': Permission denied
+find: `/proc/3/task/3/fd': Permission denied
+find: `/proc/3/task/3/fdinfo': Permission denied
+find: `/proc/3/task/3/ns': Permission denied
+find: `/proc/3/fd': Permission denied
+find: `/proc/3/map_files': Permission denied
+find: `/proc/3/fdinfo': Permission denied
+find: `/proc/3/ns': Permission denied
+find: `/proc/5/task/5/fd': Permission denied
+find: `/proc/5/task/5/fdinfo': Permission denied
+find: `/proc/5/task/5/ns': Permission denied
+find: `/proc/5/fd': Permission denied
+find: `/proc/5/map_files': Permission denied
+find: `/proc/5/fdinfo': Permission denied
+find: `/proc/5/ns': Permission denied
+find: `/proc/7/task/7/fd': Permission denied
+find: `/proc/7/task/7/fdinfo': Permission denied
+find: `/proc/7/task/7/ns': Permission denied
+find: `/proc/7/fd': Permission denied
+find: `/proc/7/map_files': Permission denied
+find: `/proc/7/fdinfo': Permission denied
+find: `/proc/7/ns': Permission denied
+find: `/proc/8/task/8/fd': Permission denied
+find: `/proc/8/task/8/fdinfo': Permission denied
+find: `/proc/8/task/8/ns': Permission denied
+find: `/proc/8/fd': Permission denied
+find: `/proc/8/map_files': Permission denied
+find: `/proc/8/fdinfo': Permission denied
+find: `/proc/8/ns': Permission denied
+find: `/proc/9/task/9/fd': Permission denied
+find: `/proc/9/task/9/fdinfo': Permission denied
+find: `/proc/9/task/9/ns': Permission denied
+find: `/proc/9/fd': Permission denied
+find: `/proc/9/map_files': Permission denied
+find: `/proc/9/fdinfo': Permission denied
+find: `/proc/9/ns': Permission denied
+find: `/proc/10/task/10/fd': Permission denied
+find: `/proc/10/task/10/fdinfo': Permission denied
+find: `/proc/10/task/10/ns': Permission denied
+find: `/proc/10/fd': Permission denied
+find: `/proc/10/map_files': Permission denied
+find: `/proc/10/fdinfo': Permission denied
+find: `/proc/10/ns': Permission denied
+find: `/proc/11/task/11/fd': Permission denied
+find: `/proc/11/task/11/fdinfo': Permission denied
+find: `/proc/11/task/11/ns': Permission denied
+find: `/proc/11/fd': Permission denied
+find: `/proc/11/map_files': Permission denied
+find: `/proc/11/fdinfo': Permission denied
+find: `/proc/11/ns': Permission denied
+find: `/proc/12/task/12/fd': Permission denied
+find: `/proc/12/task/12/fdinfo': Permission denied
+find: `/proc/12/task/12/ns': Permission denied
+find: `/proc/12/fd': Permission denied
+find: `/proc/12/map_files': Permission denied
+find: `/proc/12/fdinfo': Permission denied
+find: `/proc/12/ns': Permission denied
+find: `/proc/14/task/14/fd': Permission denied
+find: `/proc/14/task/14/fdinfo': Permission denied
+find: `/proc/14/task/14/ns': Permission denied
+find: `/proc/14/fd': Permission denied
+find: `/proc/14/map_files': Permission denied
+find: `/proc/14/fdinfo': Permission denied
+find: `/proc/14/ns': Permission denied
+find: `/proc/15/task/15/fd': Permission denied
+find: `/proc/15/task/15/fdinfo': Permission denied
+find: `/proc/15/task/15/ns': Permission denied
+find: `/proc/15/fd': Permission denied
+find: `/proc/15/map_files': Permission denied
+find: `/proc/15/fdinfo': Permission denied
+find: `/proc/15/ns': Permission denied
+find: `/proc/16/task/16/fd': Permission denied
+find: `/proc/16/task/16/fdinfo': Permission denied
+find: `/proc/16/task/16/ns': Permission denied
+find: `/proc/16/fd': Permission denied
+find: `/proc/16/map_files': Permission denied
+find: `/proc/16/fdinfo': Permission denied
+find: `/proc/16/ns': Permission denied
+find: `/proc/18/task/18/fd': Permission denied
+find: `/proc/18/task/18/fdinfo': Permission denied
+find: `/proc/18/task/18/ns': Permission denied
+find: `/proc/18/fd': Permission denied
+find: `/proc/18/map_files': Permission denied
+find: `/proc/18/fdinfo': Permission denied
+find: `/proc/18/ns': Permission denied
+find: `/proc/19/task/19/fd': Permission denied
+find: `/proc/19/task/19/fdinfo': Permission denied
+find: `/proc/19/task/19/ns': Permission denied
+find: `/proc/19/fd': Permission denied
+find: `/proc/19/map_files': Permission denied
+find: `/proc/19/fdinfo': Permission denied
+find: `/proc/19/ns': Permission denied
+find: `/proc/20/task/20/fd': Permission denied
+find: `/proc/20/task/20/fdinfo': Permission denied
+find: `/proc/20/task/20/ns': Permission denied
+find: `/proc/20/fd': Permission denied
+find: `/proc/20/map_files': Permission denied
+find: `/proc/20/fdinfo': Permission denied
+find: `/proc/20/ns': Permission denied
+find: `/proc/21/task/21/fd': Permission denied
+find: `/proc/21/task/21/fdinfo': Permission denied
+find: `/proc/21/task/21/ns': Permission denied
+find: `/proc/21/fd': Permission denied
+find: `/proc/21/map_files': Permission denied
+find: `/proc/21/fdinfo': Permission denied
+find: `/proc/21/ns': Permission denied
+find: `/proc/22/task/22/fd': Permission denied
+find: `/proc/22/task/22/fdinfo': Permission denied
+find: `/proc/22/task/22/ns': Permission denied
+find: `/proc/22/fd': Permission denied
+find: `/proc/22/map_files': Permission denied
+find: `/proc/22/fdinfo': Permission denied
+find: `/proc/22/ns': Permission denied
+find: `/proc/23/task/23/fd': Permission denied
+find: `/proc/23/task/23/fdinfo': Permission denied
+find: `/proc/23/task/23/ns': Permission denied
+find: `/proc/23/fd': Permission denied
+find: `/proc/23/map_files': Permission denied
+find: `/proc/23/fdinfo': Permission denied
+find: `/proc/23/ns': Permission denied
+find: `/proc/24/task/24/fd': Permission denied
+find: `/proc/24/task/24/fdinfo': Permission denied
+find: `/proc/24/task/24/ns': Permission denied
+find: `/proc/24/fd': Permission denied
+find: `/proc/24/map_files': Permission denied
+find: `/proc/24/fdinfo': Permission denied
+find: `/proc/24/ns': Permission denied
+find: `/proc/25/task/25/fd': Permission denied
+find: `/proc/25/task/25/fdinfo': Permission denied
+find: `/proc/25/task/25/ns': Permission denied
+find: `/proc/25/fd': Permission denied
+find: `/proc/25/map_files': Permission denied
+find: `/proc/25/fdinfo': Permission denied
+find: `/proc/25/ns': Permission denied
+find: `/proc/26/task/26/fd': Permission denied
+find: `/proc/26/task/26/fdinfo': Permission denied
+find: `/proc/26/task/26/ns': Permission denied
+find: `/proc/26/fd': Permission denied
+find: `/proc/26/map_files': Permission denied
+find: `/proc/26/fdinfo': Permission denied
+find: `/proc/26/ns': Permission denied
+find: `/proc/27/task/27/fd': Permission denied
+find: `/proc/27/task/27/fdinfo': Permission denied
+find: `/proc/27/task/27/ns': Permission denied
+find: `/proc/27/fd': Permission denied
+find: `/proc/27/map_files': Permission denied
+find: `/proc/27/fdinfo': Permission denied
+find: `/proc/27/ns': Permission denied
+find: `/proc/28/task/28/fd': Permission denied
+find: `/proc/28/task/28/fdinfo': Permission denied
+find: `/proc/28/task/28/ns': Permission denied
+find: `/proc/28/fd': Permission denied
+find: `/proc/28/map_files': Permission denied
+find: `/proc/28/fdinfo': Permission denied
+find: `/proc/28/ns': Permission denied
+find: `/proc/29/task/29/fd': Permission denied
+find: `/proc/29/task/29/fdinfo': Permission denied
+find: `/proc/29/task/29/ns': Permission denied
+find: `/proc/29/fd': Permission denied
+find: `/proc/29/map_files': Permission denied
+find: `/proc/29/fdinfo': Permission denied
+find: `/proc/29/ns': Permission denied
+find: `/proc/30/task/30/fd': Permission denied
+find: `/proc/30/task/30/fdinfo': Permission denied
+find: `/proc/30/task/30/ns': Permission denied
+find: `/proc/30/fd': Permission denied
+find: `/proc/30/map_files': Permission denied
+find: `/proc/30/fdinfo': Permission denied
+find: `/proc/30/ns': Permission denied
+find: `/proc/42/task/42/fd': Permission denied
+find: `/proc/42/task/42/fdinfo': Permission denied
+find: `/proc/42/task/42/ns': Permission denied
+find: `/proc/42/fd': Permission denied
+find: `/proc/42/map_files': Permission denied
+find: `/proc/42/fdinfo': Permission denied
+find: `/proc/42/ns': Permission denied
+find: `/proc/43/task/43/fd': Permission denied
+find: `/proc/43/task/43/fdinfo': Permission denied
+find: `/proc/43/task/43/ns': Permission denied
+find: `/proc/43/fd': Permission denied
+find: `/proc/43/map_files': Permission denied
+find: `/proc/43/fdinfo': Permission denied
+find: `/proc/43/ns': Permission denied
+find: `/proc/44/task/44/fd': Permission denied
+find: `/proc/44/task/44/fdinfo': Permission denied
+find: `/proc/44/task/44/ns': Permission denied
+find: `/proc/44/fd': Permission denied
+find: `/proc/44/map_files': Permission denied
+find: `/proc/44/fdinfo': Permission denied
+find: `/proc/44/ns': Permission denied
+find: `/proc/45/task/45/fd': Permission denied
+find: `/proc/45/task/45/fdinfo': Permission denied
+find: `/proc/45/task/45/ns': Permission denied
+find: `/proc/45/fd': Permission denied
+find: `/proc/45/map_files': Permission denied
+find: `/proc/45/fdinfo': Permission denied
+find: `/proc/45/ns': Permission denied
+find: `/proc/46/task/46/fd': Permission denied
+find: `/proc/46/task/46/fdinfo': Permission denied
+find: `/proc/46/task/46/ns': Permission denied
+find: `/proc/46/fd': Permission denied
+find: `/proc/46/map_files': Permission denied
+find: `/proc/46/fdinfo': Permission denied
+find: `/proc/46/ns': Permission denied
+find: `/proc/47/task/47/fd': Permission denied
+find: `/proc/47/task/47/fdinfo': Permission denied
+find: `/proc/47/task/47/ns': Permission denied
+find: `/proc/47/fd': Permission denied
+find: `/proc/47/map_files': Permission denied
+find: `/proc/47/fdinfo': Permission denied
+find: `/proc/47/ns': Permission denied
+find: `/proc/48/task/48/fd': Permission denied
+find: `/proc/48/task/48/fdinfo': Permission denied
+find: `/proc/48/task/48/ns': Permission denied
+find: `/proc/48/fd': Permission denied
+find: `/proc/48/map_files': Permission denied
+find: `/proc/48/fdinfo': Permission denied
+find: `/proc/48/ns': Permission denied
+find: `/proc/49/task/49/fd': Permission denied
+find: `/proc/49/task/49/fdinfo': Permission denied
+find: `/proc/49/task/49/ns': Permission denied
+find: `/proc/49/fd': Permission denied
+find: `/proc/49/map_files': Permission denied
+find: `/proc/49/fdinfo': Permission denied
+find: `/proc/49/ns': Permission denied
+find: `/proc/50/task/50/fd': Permission denied
+find: `/proc/50/task/50/fdinfo': Permission denied
+find: `/proc/50/task/50/ns': Permission denied
+find: `/proc/50/fd': Permission denied
+find: `/proc/50/map_files': Permission denied
+find: `/proc/50/fdinfo': Permission denied
+find: `/proc/50/ns': Permission denied
+find: `/proc/51/task/51/fd': Permission denied
+find: `/proc/51/task/51/fdinfo': Permission denied
+find: `/proc/51/task/51/ns': Permission denied
+find: `/proc/51/fd': Permission denied
+find: `/proc/51/map_files': Permission denied
+find: `/proc/51/fdinfo': Permission denied
+find: `/proc/51/ns': Permission denied
+find: `/proc/84/task/84/fd': Permission denied
+find: `/proc/84/task/84/fdinfo': Permission denied
+find: `/proc/84/task/84/ns': Permission denied
+find: `/proc/84/fd': Permission denied
+find: `/proc/84/map_files': Permission denied
+find: `/proc/84/fdinfo': Permission denied
+find: `/proc/84/ns': Permission denied
+find: `/proc/85/task/85/fd': Permission denied
+find: `/proc/85/task/85/fdinfo': Permission denied
+find: `/proc/85/task/85/ns': Permission denied
+find: `/proc/85/fd': Permission denied
+find: `/proc/85/map_files': Permission denied
+find: `/proc/85/fdinfo': Permission denied
+find: `/proc/85/ns': Permission denied
+find: `/proc/86/task/86/fd': Permission denied
+find: `/proc/86/task/86/fdinfo': Permission denied
+find: `/proc/86/task/86/ns': Permission denied
+find: `/proc/86/fd': Permission denied
+find: `/proc/86/map_files': Permission denied
+find: `/proc/86/fdinfo': Permission denied
+find: `/proc/86/ns': Permission denied
+find: `/proc/87/task/87/fd': Permission denied
+find: `/proc/87/task/87/fdinfo': Permission denied
+find: `/proc/87/task/87/ns': Permission denied
+find: `/proc/87/fd': Permission denied
+find: `/proc/87/map_files': Permission denied
+find: `/proc/87/fdinfo': Permission denied
+find: `/proc/87/ns': Permission denied
+find: `/proc/91/task/91/fd': Permission denied
+find: `/proc/91/task/91/fdinfo': Permission denied
+find: `/proc/91/task/91/ns': Permission denied
+find: `/proc/91/fd': Permission denied
+find: `/proc/91/map_files': Permission denied
+find: `/proc/91/fdinfo': Permission denied
+find: `/proc/91/ns': Permission denied
+find: `/proc/94/task/94/fd': Permission denied
+find: `/proc/94/task/94/fdinfo': Permission denied
+find: `/proc/94/task/94/ns': Permission denied
+find: `/proc/94/fd': Permission denied
+find: `/proc/94/map_files': Permission denied
+find: `/proc/94/fdinfo': Permission denied
+find: `/proc/94/ns': Permission denied
+find: `/proc/95/task/95/fd': Permission denied
+find: `/proc/95/task/95/fdinfo': Permission denied
+find: `/proc/95/task/95/ns': Permission denied
+find: `/proc/95/fd': Permission denied
+find: `/proc/95/map_files': Permission denied
+find: `/proc/95/fdinfo': Permission denied
+find: `/proc/95/ns': Permission denied
+find: `/proc/96/task/96/fd': Permission denied
+find: `/proc/96/task/96/fdinfo': Permission denied
+find: `/proc/96/task/96/ns': Permission denied
+find: `/proc/96/fd': Permission denied
+find: `/proc/96/map_files': Permission denied
+find: `/proc/96/fdinfo': Permission denied
+find: `/proc/96/ns': Permission denied
+find: `/proc/97/task/97/fd': Permission denied
+find: `/proc/97/task/97/fdinfo': Permission denied
+find: `/proc/97/task/97/ns': Permission denied
+find: `/proc/97/fd': Permission denied
+find: `/proc/97/map_files': Permission denied
+find: `/proc/97/fdinfo': Permission denied
+find: `/proc/97/ns': Permission denied
+find: `/proc/98/task/98/fd': Permission denied
+find: `/proc/98/task/98/fdinfo': Permission denied
+find: `/proc/98/task/98/ns': Permission denied
+find: `/proc/98/fd': Permission denied
+find: `/proc/98/map_files': Permission denied
+find: `/proc/98/fdinfo': Permission denied
+find: `/proc/98/ns': Permission denied
+find: `/proc/99/task/99/fd': Permission denied
+find: `/proc/99/task/99/fdinfo': Permission denied
+find: `/proc/99/task/99/ns': Permission denied
+find: `/proc/99/fd': Permission denied
+find: `/proc/99/map_files': Permission denied
+find: `/proc/99/fdinfo': Permission denied
+find: `/proc/99/ns': Permission denied
+find: `/proc/100/task/100/fd': Permission denied
+find: `/proc/100/task/100/fdinfo': Permission denied
+find: `/proc/100/task/100/ns': Permission denied
+find: `/proc/100/fd': Permission denied
+find: `/proc/100/map_files': Permission denied
+find: `/proc/100/fdinfo': Permission denied
+find: `/proc/100/ns': Permission denied
+find: `/proc/101/task/101/fd': Permission denied
+find: `/proc/101/task/101/fdinfo': Permission denied
+find: `/proc/101/task/101/ns': Permission denied
+find: `/proc/101/fd': Permission denied
+find: `/proc/101/map_files': Permission denied
+find: `/proc/101/fdinfo': Permission denied
+find: `/proc/101/ns': Permission denied
+find: `/proc/102/task/102/fd': Permission denied
+find: `/proc/102/task/102/fdinfo': Permission denied
+find: `/proc/102/task/102/ns': Permission denied
+find: `/proc/102/fd': Permission denied
+find: `/proc/102/map_files': Permission denied
+find: `/proc/102/fdinfo': Permission denied
+find: `/proc/102/ns': Permission denied
+find: `/proc/107/task/107/fd': Permission denied
+find: `/proc/107/task/107/fdinfo': Permission denied
+find: `/proc/107/task/107/ns': Permission denied
+find: `/proc/107/fd': Permission denied
+find: `/proc/107/map_files': Permission denied
+find: `/proc/107/fdinfo': Permission denied
+find: `/proc/107/ns': Permission denied
+find: `/proc/108/task/108/fd': Permission denied
+find: `/proc/108/task/108/fdinfo': Permission denied
+find: `/proc/108/task/108/ns': Permission denied
+find: `/proc/108/fd': Permission denied
+find: `/proc/108/map_files': Permission denied
+find: `/proc/108/fdinfo': Permission denied
+find: `/proc/108/ns': Permission denied
+find: `/proc/109/task/109/fd': Permission denied
+find: `/proc/109/task/109/fdinfo': Permission denied
+find: `/proc/109/task/109/ns': Permission denied
+find: `/proc/109/fd': Permission denied
+find: `/proc/109/map_files': Permission denied
+find: `/proc/109/fdinfo': Permission denied
+find: `/proc/109/ns': Permission denied
+find: `/proc/110/task/110/fd': Permission denied
+find: `/proc/110/task/110/fdinfo': Permission denied
+find: `/proc/110/task/110/ns': Permission denied
+find: `/proc/110/fd': Permission denied
+find: `/proc/110/map_files': Permission denied
+find: `/proc/110/fdinfo': Permission denied
+find: `/proc/110/ns': Permission denied
+find: `/proc/111/task/111/fd': Permission denied
+find: `/proc/111/task/111/fdinfo': Permission denied
+find: `/proc/111/task/111/ns': Permission denied
+find: `/proc/111/fd': Permission denied
+find: `/proc/111/map_files': Permission denied
+find: `/proc/111/fdinfo': Permission denied
+find: `/proc/111/ns': Permission denied
+find: `/proc/121/task/121/fd': Permission denied
+find: `/proc/121/task/121/fdinfo': Permission denied
+find: `/proc/121/task/121/ns': Permission denied
+find: `/proc/121/fd': Permission denied
+find: `/proc/121/map_files': Permission denied
+find: `/proc/121/fdinfo': Permission denied
+find: `/proc/121/ns': Permission denied
+find: `/proc/122/task/122/fd': Permission denied
+find: `/proc/122/task/122/fdinfo': Permission denied
+find: `/proc/122/task/122/ns': Permission denied
+find: `/proc/122/fd': Permission denied
+find: `/proc/122/map_files': Permission denied
+find: `/proc/122/fdinfo': Permission denied
+find: `/proc/122/ns': Permission denied
+find: `/proc/130/task/130/fd': Permission denied
+find: `/proc/130/task/130/fdinfo': Permission denied
+find: `/proc/130/task/130/ns': Permission denied
+find: `/proc/130/fd': Permission denied
+find: `/proc/130/map_files': Permission denied
+find: `/proc/130/fdinfo': Permission denied
+find: `/proc/130/ns': Permission denied
+find: `/proc/234/task/234/fd': Permission denied
+find: `/proc/234/task/234/fdinfo': Permission denied
+find: `/proc/234/task/234/ns': Permission denied
+find: `/proc/234/fd': Permission denied
+find: `/proc/234/map_files': Permission denied
+find: `/proc/234/fdinfo': Permission denied
+find: `/proc/234/ns': Permission denied
+find: `/proc/239/task/239/fd': Permission denied
+find: `/proc/239/task/239/fdinfo': Permission denied
+find: `/proc/239/task/239/ns': Permission denied
+find: `/proc/239/fd': Permission denied
+find: `/proc/239/map_files': Permission denied
+find: `/proc/239/fdinfo': Permission denied
+find: `/proc/239/ns': Permission denied
+find: `/proc/313/task/313/fd': Permission denied
+find: `/proc/313/task/313/fdinfo': Permission denied
+find: `/proc/313/task/313/ns': Permission denied
+find: `/proc/313/fd': Permission denied
+find: `/proc/313/map_files': Permission denied
+find: `/proc/313/fdinfo': Permission denied
+find: `/proc/313/ns': Permission denied
+find: `/proc/318/task/318/fd': Permission denied
+find: `/proc/318/task/318/fdinfo': Permission denied
+find: `/proc/318/task/318/ns': Permission denied
+find: `/proc/318/fd': Permission denied
+find: `/proc/318/map_files': Permission denied
+find: `/proc/318/fdinfo': Permission denied
+find: `/proc/318/ns': Permission denied
+find: `/proc/498/task/498/fd': Permission denied
+find: `/proc/498/task/498/fdinfo': Permission denied
+find: `/proc/498/task/498/ns': Permission denied
+find: `/proc/498/fd': Permission denied
+find: `/proc/498/map_files': Permission denied
+find: `/proc/498/fdinfo': Permission denied
+find: `/proc/498/ns': Permission denied
+find: `/proc/501/task/501/fd': Permission denied
+find: `/proc/501/task/501/fdinfo': Permission denied
+find: `/proc/501/task/501/ns': Permission denied
+find: `/proc/501/fd': Permission denied
+find: `/proc/501/map_files': Permission denied
+find: `/proc/501/fdinfo': Permission denied
+find: `/proc/501/ns': Permission denied
+find: `/proc/502/task/502/fd': Permission denied
+find: `/proc/502/task/502/fdinfo': Permission denied
+find: `/proc/502/task/502/ns': Permission denied
+find: `/proc/502/fd': Permission denied
+find: `/proc/502/map_files': Permission denied
+find: `/proc/502/fdinfo': Permission denied
+find: `/proc/502/ns': Permission denied
+find: `/proc/503/task/503/fd': Permission denied
+find: `/proc/503/task/503/fdinfo': Permission denied
+find: `/proc/503/task/503/ns': Permission denied
+find: `/proc/503/fd': Permission denied
+find: `/proc/503/map_files': Permission denied
+find: `/proc/503/fdinfo': Permission denied
+find: `/proc/503/ns': Permission denied
+find: `/proc/530/task/530/fd': Permission denied
+find: `/proc/530/task/530/fdinfo': Permission denied
+find: `/proc/530/task/530/ns': Permission denied
+find: `/proc/530/task/583/fd': Permission denied
+find: `/proc/530/task/583/fdinfo': Permission denied
+find: `/proc/530/task/583/ns': Permission denied
+find: `/proc/530/task/584/fd': Permission denied
+find: `/proc/530/task/584/fdinfo': Permission denied
+find: `/proc/530/task/584/ns': Permission denied
+find: `/proc/530/task/585/fd': Permission denied
+find: `/proc/530/task/585/fdinfo': Permission denied
+find: `/proc/530/task/585/ns': Permission denied
+find: `/proc/530/task/586/fd': Permission denied
+find: `/proc/530/task/586/fdinfo': Permission denied
+find: `/proc/530/task/586/ns': Permission denied
+find: `/proc/530/task/1463/fd': Permission denied
+find: `/proc/530/task/1463/fdinfo': Permission denied
+find: `/proc/530/task/1463/ns': Permission denied
+find: `/proc/530/task/1464/fd': Permission denied
+find: `/proc/530/task/1464/fdinfo': Permission denied
+find: `/proc/530/task/1464/ns': Permission denied
+find: `/proc/530/task/1465/fd': Permission denied
+find: `/proc/530/task/1465/fdinfo': Permission denied
+find: `/proc/530/task/1465/ns': Permission denied
+find: `/proc/530/task/1466/fd': Permission denied
+find: `/proc/530/task/1466/fdinfo': Permission denied
+find: `/proc/530/task/1466/ns': Permission denied
+find: `/proc/530/fd': Permission denied
+find: `/proc/530/map_files': Permission denied
+find: `/proc/530/fdinfo': Permission denied
+find: `/proc/530/ns': Permission denied
+find: `/proc/553/task/553/fd': Permission denied
+find: `/proc/553/task/553/fdinfo': Permission denied
+find: `/proc/553/task/553/ns': Permission denied
+find: `/proc/553/fd': Permission denied
+find: `/proc/553/map_files': Permission denied
+find: `/proc/553/fdinfo': Permission denied
+find: `/proc/553/ns': Permission denied
+find: `/proc/609/task/609/fd': Permission denied
+find: `/proc/609/task/609/fdinfo': Permission denied
+find: `/proc/609/task/609/ns': Permission denied
+find: `/proc/609/fd': Permission denied
+find: `/proc/609/map_files': Permission denied
+find: `/proc/609/fdinfo': Permission denied
+find: `/proc/609/ns': Permission denied
+find: `/proc/632/task/632/fd': Permission denied
+find: `/proc/632/task/632/fdinfo': Permission denied
+find: `/proc/632/task/632/ns': Permission denied
+find: `/proc/632/fd': Permission denied
+find: `/proc/632/map_files': Permission denied
+find: `/proc/632/fdinfo': Permission denied
+find: `/proc/632/ns': Permission denied
+find: `/proc/661/task/661/fd': Permission denied
+find: `/proc/661/task/661/fdinfo': Permission denied
+find: `/proc/661/task/661/ns': Permission denied
+find: `/proc/661/task/674/fd': Permission denied
+find: `/proc/661/task/674/fdinfo': Permission denied
+find: `/proc/661/task/674/ns': Permission denied
+find: `/proc/661/task/675/fd': Permission denied
+find: `/proc/661/task/675/fdinfo': Permission denied
+find: `/proc/661/task/675/ns': Permission denied
+find: `/proc/661/task/676/fd': Permission denied
+find: `/proc/661/task/676/fdinfo': Permission denied
+find: `/proc/661/task/676/ns': Permission denied
+find: `/proc/661/fd': Permission denied
+find: `/proc/661/map_files': Permission denied
+find: `/proc/661/fdinfo': Permission denied
+find: `/proc/661/ns': Permission denied
+find: `/proc/691/task/691/fd': Permission denied
+find: `/proc/691/task/691/fdinfo': Permission denied
+find: `/proc/691/task/691/ns': Permission denied
+find: `/proc/691/fd': Permission denied
+find: `/proc/691/map_files': Permission denied
+find: `/proc/691/fdinfo': Permission denied
+find: `/proc/691/ns': Permission denied
+find: `/proc/692/task/692/fd': Permission denied
+find: `/proc/692/task/692/fdinfo': Permission denied
+find: `/proc/692/task/692/ns': Permission denied
+find: `/proc/692/fd': Permission denied
+find: `/proc/692/map_files': Permission denied
+find: `/proc/692/fdinfo': Permission denied
+find: `/proc/692/ns': Permission denied
+find: `/proc/795/task/795/fd': Permission denied
+find: `/proc/795/task/795/fdinfo': Permission denied
+find: `/proc/795/task/795/ns': Permission denied
+find: `/proc/795/fd': Permission denied
+find: `/proc/795/map_files': Permission denied
+find: `/proc/795/fdinfo': Permission denied
+find: `/proc/795/ns': Permission denied
+find: `/proc/967/task/967/fd': Permission denied
+find: `/proc/967/task/967/fdinfo': Permission denied
+find: `/proc/967/task/967/ns': Permission denied
+find: `/proc/967/task/971/fd': Permission denied
+find: `/proc/967/task/971/fdinfo': Permission denied
+find: `/proc/967/task/971/ns': Permission denied
+find: `/proc/967/task/1009/fd': Permission denied
+find: `/proc/967/task/1009/fdinfo': Permission denied
+find: `/proc/967/task/1009/ns': Permission denied
+find: `/proc/967/task/1012/fd': Permission denied
+find: `/proc/967/task/1012/fdinfo': Permission denied
+find: `/proc/967/task/1012/ns': Permission denied
+find: `/proc/967/fd': Permission denied
+find: `/proc/967/map_files': Permission denied
+find: `/proc/967/fdinfo': Permission denied
+find: `/proc/967/ns': Permission denied
+find: `/proc/981/task/981/fd': Permission denied
+find: `/proc/981/task/981/fdinfo': Permission denied
+find: `/proc/981/task/981/ns': Permission denied
+find: `/proc/981/fd': Permission denied
+find: `/proc/981/map_files': Permission denied
+find: `/proc/981/fdinfo': Permission denied
+find: `/proc/981/ns': Permission denied
+find: `/proc/982/task/982/fd': Permission denied
+find: `/proc/982/task/982/fdinfo': Permission denied
+find: `/proc/982/task/982/ns': Permission denied
+find: `/proc/982/fd': Permission denied
+find: `/proc/982/map_files': Permission denied
+find: `/proc/982/fdinfo': Permission denied
+find: `/proc/982/ns': Permission denied
+find: `/proc/997/task/997/fd': Permission denied
+find: `/proc/997/task/997/fdinfo': Permission denied
+find: `/proc/997/task/997/ns': Permission denied
+find: `/proc/997/fd': Permission denied
+find: `/proc/997/map_files': Permission denied
+find: `/proc/997/fdinfo': Permission denied
+find: `/proc/997/ns': Permission denied
+find: `/proc/1005/task/1005/fd': Permission denied
+find: `/proc/1005/task/1005/fdinfo': Permission denied
+find: `/proc/1005/task/1005/ns': Permission denied
+find: `/proc/1005/fd': Permission denied
+find: `/proc/1005/map_files': Permission denied
+find: `/proc/1005/fdinfo': Permission denied
+find: `/proc/1005/ns': Permission denied
+find: `/proc/1013/task/1013/fd': Permission denied
+find: `/proc/1013/task/1013/fdinfo': Permission denied
+find: `/proc/1013/task/1013/ns': Permission denied
+find: `/proc/1013/task/1075/fd': Permission denied
+find: `/proc/1013/task/1075/fdinfo': Permission denied
+find: `/proc/1013/task/1075/ns': Permission denied
+find: `/proc/1013/task/1247/fd': Permission denied
+find: `/proc/1013/task/1247/fdinfo': Permission denied
+find: `/proc/1013/task/1247/ns': Permission denied
+find: `/proc/1013/fd': Permission denied
+find: `/proc/1013/map_files': Permission denied
+find: `/proc/1013/fdinfo': Permission denied
+find: `/proc/1013/ns': Permission denied
+find: `/proc/1017/task/1017/fd': Permission denied
+find: `/proc/1017/task/1017/fdinfo': Permission denied
+find: `/proc/1017/task/1017/ns': Permission denied
+find: `/proc/1017/task/1023/fd': Permission denied
+find: `/proc/1017/task/1023/fdinfo': Permission denied
+find: `/proc/1017/task/1023/ns': Permission denied
+find: `/proc/1017/task/1028/fd': Permission denied
+find: `/proc/1017/task/1028/fdinfo': Permission denied
+find: `/proc/1017/task/1028/ns': Permission denied
+find: `/proc/1017/fd': Permission denied
+find: `/proc/1017/map_files': Permission denied
+find: `/proc/1017/fdinfo': Permission denied
+find: `/proc/1017/ns': Permission denied
+find: `/proc/1019/task/1019/fd': Permission denied
+find: `/proc/1019/task/1019/fdinfo': Permission denied
+find: `/proc/1019/task/1019/ns': Permission denied
+find: `/proc/1019/fd': Permission denied
+find: `/proc/1019/map_files': Permission denied
+find: `/proc/1019/fdinfo': Permission denied
+find: `/proc/1019/ns': Permission denied
+find: `/proc/1036/task/1036/fd': Permission denied
+find: `/proc/1036/task/1036/fdinfo': Permission denied
+find: `/proc/1036/task/1036/ns': Permission denied
+find: `/proc/1036/fd': Permission denied
+find: `/proc/1036/map_files': Permission denied
+find: `/proc/1036/fdinfo': Permission denied
+find: `/proc/1036/ns': Permission denied
+find: `/proc/1042/task/1042/fd': Permission denied
+find: `/proc/1042/task/1042/fdinfo': Permission denied
+find: `/proc/1042/task/1042/ns': Permission denied
+find: `/proc/1042/fd': Permission denied
+find: `/proc/1042/map_files': Permission denied
+find: `/proc/1042/fdinfo': Permission denied
+find: `/proc/1042/ns': Permission denied
+find: `/proc/1059/task/1059/fd': Permission denied
+find: `/proc/1059/task/1059/fdinfo': Permission denied
+find: `/proc/1059/task/1059/ns': Permission denied
+find: `/proc/1059/fd': Permission denied
+find: `/proc/1059/map_files': Permission denied
+find: `/proc/1059/fdinfo': Permission denied
+find: `/proc/1059/ns': Permission denied
+find: `/proc/1089/task/1089/fd': Permission denied
+find: `/proc/1089/task/1089/fdinfo': Permission denied
+find: `/proc/1089/task/1089/ns': Permission denied
+find: `/proc/1089/task/1140/fd': Permission denied
+find: `/proc/1089/task/1140/fdinfo': Permission denied
+find: `/proc/1089/task/1140/ns': Permission denied
+find: `/proc/1089/task/1141/fd': Permission denied
+find: `/proc/1089/task/1141/fdinfo': Permission denied
+find: `/proc/1089/task/1141/ns': Permission denied
+find: `/proc/1089/fd': Permission denied
+find: `/proc/1089/map_files': Permission denied
+find: `/proc/1089/fdinfo': Permission denied
+find: `/proc/1089/ns': Permission denied
+find: `/proc/1192/task/1192/fd': Permission denied
+find: `/proc/1192/task/1192/fdinfo': Permission denied
+find: `/proc/1192/task/1192/ns': Permission denied
+find: `/proc/1192/fd': Permission denied
+find: `/proc/1192/map_files': Permission denied
+find: `/proc/1192/fdinfo': Permission denied
+find: `/proc/1192/ns': Permission denied
+find: `/proc/1230/task/1230/fd': Permission denied
+find: `/proc/1230/task/1230/fdinfo': Permission denied
+find: `/proc/1230/task/1230/ns': Permission denied
+find: `/proc/1230/fd': Permission denied
+find: `/proc/1230/map_files': Permission denied
+find: `/proc/1230/fdinfo': Permission denied
+find: `/proc/1230/ns': Permission denied
+find: `/proc/1239/task/1239/fd': Permission denied
+find: `/proc/1239/task/1239/fdinfo': Permission denied
+find: `/proc/1239/task/1239/ns': Permission denied
+find: `/proc/1239/fd': Permission denied
+find: `/proc/1239/map_files': Permission denied
+find: `/proc/1239/fdinfo': Permission denied
+find: `/proc/1239/ns': Permission denied
+find: `/proc/1246/task/1246/fd': Permission denied
+find: `/proc/1246/task/1246/fdinfo': Permission denied
+find: `/proc/1246/task/1246/ns': Permission denied
+find: `/proc/1246/fd': Permission denied
+find: `/proc/1246/map_files': Permission denied
+find: `/proc/1246/fdinfo': Permission denied
+find: `/proc/1246/ns': Permission denied
+find: `/proc/1332/task/1332/fd': Permission denied
+find: `/proc/1332/task/1332/fdinfo': Permission denied
+find: `/proc/1332/task/1332/ns': Permission denied
+find: `/proc/1332/fd': Permission denied
+find: `/proc/1332/map_files': Permission denied
+find: `/proc/1332/fdinfo': Permission denied
+find: `/proc/1332/ns': Permission denied
+find: `/proc/1343/task/1343/fd': Permission denied
+find: `/proc/1343/task/1343/fdinfo': Permission denied
+find: `/proc/1343/task/1343/ns': Permission denied
+find: `/proc/1343/task/1352/fd': Permission denied
+find: `/proc/1343/task/1352/fdinfo': Permission denied
+find: `/proc/1343/task/1352/ns': Permission denied
+find: `/proc/1343/fd': Permission denied
+find: `/proc/1343/map_files': Permission denied
+find: `/proc/1343/fdinfo': Permission denied
+find: `/proc/1343/ns': Permission denied
+find: `/proc/1490/task/1490/fd': Permission denied
+find: `/proc/1490/task/1490/fdinfo': Permission denied
+find: `/proc/1490/task/1490/ns': Permission denied
+find: `/proc/1490/task/1494/fd': Permission denied
+find: `/proc/1490/task/1494/fdinfo': Permission denied
+find: `/proc/1490/task/1494/ns': Permission denied
+find: `/proc/1490/task/1495/fd': Permission denied
+find: `/proc/1490/task/1495/fdinfo': Permission denied
+find: `/proc/1490/task/1495/ns': Permission denied
+find: `/proc/1490/fd': Permission denied
+find: `/proc/1490/map_files': Permission denied
+find: `/proc/1490/fdinfo': Permission denied
+find: `/proc/1490/ns': Permission denied
+find: `/proc/1528/task/1528/fd': Permission denied
+find: `/proc/1528/task/1528/fdinfo': Permission denied
+find: `/proc/1528/task/1528/ns': Permission denied
+find: `/proc/1528/fd': Permission denied
+find: `/proc/1528/map_files': Permission denied
+find: `/proc/1528/fdinfo': Permission denied
+find: `/proc/1528/ns': Permission denied
+find: `/proc/1534/task/1534/fd': Permission denied
+find: `/proc/1534/task/1534/fdinfo': Permission denied
+find: `/proc/1534/task/1534/ns': Permission denied
+find: `/proc/1534/task/1537/fd': Permission denied
+find: `/proc/1534/task/1537/fdinfo': Permission denied
+find: `/proc/1534/task/1537/ns': Permission denied
+find: `/proc/1534/task/1539/fd': Permission denied
+find: `/proc/1534/task/1539/fdinfo': Permission denied
+find: `/proc/1534/task/1539/ns': Permission denied
+find: `/proc/1534/task/1544/fd': Permission denied
+find: `/proc/1534/task/1544/fdinfo': Permission denied
+find: `/proc/1534/task/1544/ns': Permission denied
+find: `/proc/1534/task/1551/fd': Permission denied
+find: `/proc/1534/task/1551/fdinfo': Permission denied
+find: `/proc/1534/task/1551/ns': Permission denied
+find: `/proc/1534/fd': Permission denied
+find: `/proc/1534/map_files': Permission denied
+find: `/proc/1534/fdinfo': Permission denied
+find: `/proc/1534/ns': Permission denied
+find: `/proc/1552/task/1552/fd': Permission denied
+find: `/proc/1552/task/1552/fdinfo': Permission denied
+find: `/proc/1552/task/1552/ns': Permission denied
+find: `/proc/1552/fd': Permission denied
+find: `/proc/1552/map_files': Permission denied
+find: `/proc/1552/fdinfo': Permission denied
+find: `/proc/1552/ns': Permission denied
+find: `/proc/1622/task/1622/fd': Permission denied
+find: `/proc/1622/task/1622/fdinfo': Permission denied
+find: `/proc/1622/task/1622/ns': Permission denied
+find: `/proc/1622/fd': Permission denied
+find: `/proc/1622/map_files': Permission denied
+find: `/proc/1622/fdinfo': Permission denied
+find: `/proc/1622/ns': Permission denied
+find: `/proc/1722/task/1722/fd': Permission denied
+find: `/proc/1722/task/1722/fdinfo': Permission denied
+find: `/proc/1722/task/1722/ns': Permission denied
+find: `/proc/1722/fd': Permission denied
+find: `/proc/1722/map_files': Permission denied
+find: `/proc/1722/fdinfo': Permission denied
+find: `/proc/1722/ns': Permission denied
+find: `/proc/1733/task/1733/fd': Permission denied
+find: `/proc/1733/task/1733/fdinfo': Permission denied
+find: `/proc/1733/task/1733/ns': Permission denied
+find: `/proc/1733/fd': Permission denied
+find: `/proc/1733/map_files': Permission denied
+find: `/proc/1733/fdinfo': Permission denied
+find: `/proc/1733/ns': Permission denied
+find: `/proc/2287/task/2287/fd': Permission denied
+find: `/proc/2287/task/2287/fdinfo': Permission denied
+find: `/proc/2287/task/2287/ns': Permission denied
+find: `/proc/2287/fd': Permission denied
+find: `/proc/2287/map_files': Permission denied
+find: `/proc/2287/fdinfo': Permission denied
+find: `/proc/2287/ns': Permission denied
+find: `/proc/2929/task/2929/fd': Permission denied
+find: `/proc/2929/task/2929/fdinfo': Permission denied
+find: `/proc/2929/task/2929/ns': Permission denied
+find: `/proc/2929/fd': Permission denied
+find: `/proc/2929/map_files': Permission denied
+find: `/proc/2929/fdinfo': Permission denied
+find: `/proc/2929/ns': Permission denied
+find: `/proc/2987/task/2987/fd': Permission denied
+find: `/proc/2987/task/2987/fdinfo': Permission denied
+find: `/proc/2987/task/2987/ns': Permission denied
+find: `/proc/2987/fd': Permission denied
+find: `/proc/2987/map_files': Permission denied
+find: `/proc/2987/fdinfo': Permission denied
+find: `/proc/2987/ns': Permission denied
+find: `/proc/3009/task/3009/fd': Permission denied
+find: `/proc/3009/task/3009/fdinfo': Permission denied
+find: `/proc/3009/task/3009/ns': Permission denied
+find: `/proc/3009/fd': Permission denied
+find: `/proc/3009/map_files': Permission denied
+find: `/proc/3009/fdinfo': Permission denied
+find: `/proc/3009/ns': Permission denied
+find: `/proc/3038/task/3038/fd': Permission denied
+find: `/proc/3038/task/3038/fdinfo': Permission denied
+find: `/proc/3038/task/3038/ns': Permission denied
+find: `/proc/3038/fd': Permission denied
+find: `/proc/3038/map_files': Permission denied
+find: `/proc/3038/fdinfo': Permission denied
+find: `/proc/3038/ns': Permission denied
+find: `/opt/dtweb/dtbkernel/arch/arm/boot/dts': Permission denied
+find: `/sys/kernel/debug': Permission denied
+ecube@udoo:/$ find / -name 'mkudoobuntu.tar.gz' -printsudo 
+ecube@udoo:/$ 

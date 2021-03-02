@@ -1,0 +1,1 @@
+cmd_/nfs_root/leddev/leddrv.ko := arm-linux-gnueabihf-ld -EL -r  -T /home/embdtut/work/kernel/linux_kernel/scripts/module-common.lds --build-id  -o /nfs_root/leddev/leddrv.ko /nfs_root/leddev/leddrv.o /nfs_root/leddev/leddrv.mod.o

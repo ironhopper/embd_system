@@ -1,0 +1,31 @@
+head	1.1;
+access;
+symbols
+	newbranch:1.1.0.2
+	r1:1.1;
+locks; strict;
+comment	@ * @;
+
+
+1.1
+date	2020.10.21.10.46.52;	author stguest;	state Exp;
+branches;
+next	;
+commitid	1005F90119C38EC5E88;
+
+
+desc
+@@
+
+
+1.1
+log
+@first add
+@
+text
+@#include <stdio.h>
+void bye(void){
+	printf("bye22.\n\n");
+	printf("bye33.\n\n");
+}
+@

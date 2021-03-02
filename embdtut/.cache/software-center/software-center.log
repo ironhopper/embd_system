@@ -1,0 +1,17 @@
+2020-09-08 22:38:32,730 - softwarecenter.ui.gtk3.app - INFO - setting up proxy 'None'
+2020-09-08 22:38:34,486 - softwarecenter.region - WARNING - failed to use geoclue: 'org.freedesktop.Geoclue.Error.notAvailable: Geoclue master client has no usable Address providers'
+2020-09-08 22:38:34,881 - softwarecenter.backend.reviews - WARNING - Could not get usefulness from server, no username in config file
+2020-09-08 22:38:34,939 - softwarecenter.plugin - INFO - activating plugin '<module 'webapps_activation' from '/usr/share/software-center/softwarecenter/plugins/webapps_activation.pyc'>'
+2020-09-08 22:38:35,078 - softwarecenter.fixme - WARNING - logs to the root logger: '('/usr/lib/python2.7/dist-packages/gi/importer.py', 51, 'find_module')'
+2020-09-08 22:38:35,077 - root - ERROR - Could not find any typelib for LaunchpadIntegration
+2020-09-08 22:38:35,358 - softwarecenter.db.pkginfo_impl.aptcache - INFO - aptcache.open()
+2020-09-08 22:38:36,552 - softwarecenter.backend.spawn_helper - WARNING - exit code 1 from helper for '['/usr/share/software-center/piston_generic_helper.py', '--datadir', '/usr/share/software-center/', 'RatingsAndReviewsAPI', 'review_stats']'
+2020-09-08 22:38:36,552 - softwarecenter.backend.spawn_helper - WARNING - got error from helper: 'WARNING:__main__:no data
+'
+2020-09-08 22:38:40,233 - softwarecenter.backend.spawn_helper - WARNING - exit code 1 from helper for '['/usr/share/software-center/piston_generic_helper.py', '--datadir', '/usr/share/software-center/', 'SoftwareCenterAgentAPI', 'exhibits', '{"lang": "ko", "series": "trusty"}']'
+2020-09-08 22:38:40,233 - softwarecenter.backend.spawn_helper - WARNING - got error from helper: 'WARNING:__main__:no data
+'
+2020-09-08 22:38:51,813 - softwarecenter.backend.spawn_helper - WARNING - exit code 1 from helper for '['/usr/share/software-center/piston_generic_helper.py', '--datadir', '/usr/share/software-center/', 'SoftwareCenterAgentAPI', 'available_apps', '{"lang": "ko", "series": "trusty", "arch": "amd64"}']'
+2020-09-08 22:38:51,814 - softwarecenter.backend.spawn_helper - WARNING - got error from helper: 'WARNING:__main__:no data
+'
+2020-09-08 22:38:51,814 - softwarecenter.db.update - WARNING - update_from_software_center_agent: error: 'WARNING:__main__:no data\n'

@@ -1,0 +1,1 @@
+cmd_/nfs_root/module/my_module.ko := arm-linux-gnueabihf-ld -EL -r  -T /home/embdtut/work/kernel/linux_kernel/scripts/module-common.lds --build-id  -o /nfs_root/module/my_module.ko /nfs_root/module/my_module.o /nfs_root/module/my_module.mod.o
