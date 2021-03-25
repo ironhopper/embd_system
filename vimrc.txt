@@ -1,2 +1,20 @@
 vimrc text
 
+imap script<Tab> <script></script><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+imap style<Tab> <style></style><Left><Left><Left><Left><Left><Left><Left><Left>
+imap ahref<Tab> <ahref></ahref>8<Left>
+imap title<Tab> <title></title>8<Left>
+
+imap head<Tab> <head></head><Left><Left><Left><Left><Left><Left><Left>
+imap body<Tab> <body></body>7<Left>
+imap html<Tab> <html></html>7<Left>
+
+imap div<Tab> <div></div><Left><Left><Left><Left><Left><Left>
+
+imap br<Tab> <br></br><Left><Left><Left><Left><Left>
+imap ul<Tab> <ul></ul>5<Left>
+imap ol<Tab> <ol></ol>5<Left>
+imap li<Tab> <li></li>5<left>
+imap h1<Tab> <h1></h1>5<Left>
+
+imap p<Tab> <p></p><Left><Left><Left><Left>
