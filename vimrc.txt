@@ -1,4 +1,5 @@
 vimrc text
+(goormide2 branch not exist originally)
 
 imap script<Tab> <script></script><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 imap style<Tab> <style></style><Left><Left><Left><Left><Left><Left><Left><Left>
